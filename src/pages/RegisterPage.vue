@@ -1,9 +1,11 @@
 <script>
-
+export default {
+  name: "RegisterPage"
+}
 </script>
 
 <template>
-  <router-view></router-view>
+
 </template>
 
 <style scoped lang="scss">
