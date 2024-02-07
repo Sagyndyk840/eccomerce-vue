@@ -1,8 +1,13 @@
-<script setup>
+<script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
 import 'swiper/css';
 
+export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+}
 </script>
 
 <template>
