@@ -18,6 +18,10 @@ export default {
     value: {
       default: "",
       type: String,
+    },
+    errors: {
+      type: Array,
+      required: false,
     }
   },
   methods: {
@@ -29,7 +33,9 @@ export default {
 </script>
 
 <template>
-  <input :type="type" class="input" :class="className" :placeholder="placeholder" :value="value" @input="updateInput"/>
+  <input :type="type" class="input" :class="[className, {'error' : errors.length}]" :placeholder="placeholder" :value="value" @input="updateInput"/>
+  <p v-for="error of errors"
+     :key="error.$uid" class="error-text">{{error.$message}}</p>
 </template>
 
 <style scoped lang="scss">
@@ -52,6 +58,13 @@ export default {
     color: rgba(37, 37, 37, 0.50);
   }
 
+}
+.error-text {
+  color: #FFA4A4 !important;
+  font-family: "Raleway", serif;
+  font-size: 16px;
+  font-weight: 200;
+  margin-bottom: 16px;
 }
 
 .error {
