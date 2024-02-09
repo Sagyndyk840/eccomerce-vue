@@ -1,13 +1,103 @@
 <script>
+import ProductItem from "@/components/ProductItem.vue";
+import CatalogListRoute from "@/components/CatalogListRoute.vue";
+
 export default {
-  name: "CatalogPage"
+  name: "CatalogPage",
+  components: {CatalogListRoute, ProductItem}
 }
 </script>
 
 <template>
-
+  <section class="catalog-page">
+    <div class="container">
+      <div class="catalog-inner">
+        <div class="catalog-left">
+          <CatalogListRoute />
+        </div>
+        <div class="catalog-right">
+          <div class="filter"></div>
+          <div class="catalog-products">
+            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :sizes="['XS', 'XL', 'SM', 'MD']"
+                         :colors="['#871212', '#F1DDAA']" />
+            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :sizes="['XS', 'XL', 'SM', 'MD']"
+                         :colors="['#871212', '#F1DDAA']" />
+            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :sizes="['XS', 'XL', 'SM', 'MD']"
+                         :colors="['#871212', '#F1DDAA']" />
+            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :sizes="['XS', 'XL', 'SM', 'MD']"
+                         :colors="['#871212', '#F1DDAA']" />
+            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :sizes="['XS', 'XL', 'SM', 'MD']"
+                         :colors="['#871212', '#F1DDAA']" />
+            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :sizes="['XS', 'XL', 'SM', 'MD']"
+                         :colors="['#871212', '#F1DDAA']" />
+            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :sizes="['XS', 'XL', 'SM', 'MD']"
+                         :colors="['#871212', '#F1DDAA']" />
+          </div>
+          <ul id="pagination">
+            <li><a class="" href="#">«</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#" class="active">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#">»</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
-<style scoped lang="scss">
+<style  lang="scss">
+.catalog-page {
+  margin-top: 70px;
 
+  .catalog-inner {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 30px;
+  }
+
+  .catalog-left {
+
+    &__title {
+      margin-bottom: 30px;
+    }
+    nav {
+      ul {
+        li {
+          margin-bottom: 20px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          a {
+            color: #252525;
+            font-family: "Raleway", serif;
+            font-size: 16px;
+            font-weight: 300;
+            transition: .3s all ease;
+            &:hover {
+              color: #CCA88A;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .catalog-products {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+  }
+}
 </style>

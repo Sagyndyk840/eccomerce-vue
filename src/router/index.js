@@ -4,6 +4,8 @@ import HomePage from "../pages/HomePage.vue";
 import AuthLayout from "../layouts/AuthLayout.vue";
 import LoginPage from "../pages/LoginPage.vue";
 import RegisterPage from "../pages/RegisterPage.vue";
+import DefaultLayout from "@/layouts/DefaultLayout.vue";
+import CatalogPage from "@/pages/catalog/CatalogPage.vue";
 
 const routes = [
     {
@@ -18,7 +20,7 @@ const routes = [
         ]
     },
     {
-        path: '/auth',
+        path: '/',
         component: AuthLayout,
         children: [
             {
@@ -30,6 +32,17 @@ const routes = [
                 path: '/register',
                 component: RegisterPage,
                 name: 'RegisterPage',
+            }
+        ]
+    },
+    {
+        path: '/',
+        component: DefaultLayout,
+        children: [
+            {
+                path: '/catalog',
+                component: CatalogPage,
+                name: 'CatalogPage',
             }
         ]
     }
