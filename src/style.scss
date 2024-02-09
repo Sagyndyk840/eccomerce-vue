@@ -103,3 +103,30 @@ button {
   font-weight: 700;
 }
 
+// Pagination
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+  margin-top: 30px;
+}
+.paginate-buttons {
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  background-color: #CCA88A;
+  border: 1px solid #CCA88A;
+  color: white;
+}
+.paginate-buttons:hover {
+  background-color: #CCA88A;
+  opacity: .7;
+  transition: .3s all ease;
+  }
+.active-page {
+  background-color: #CCA88A;
+  border: 1px solid #CCA88A;
+  color: white;
+  opacity: .7;
+}
