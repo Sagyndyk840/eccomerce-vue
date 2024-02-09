@@ -36,7 +36,9 @@ export default {
             </router-link>
           </li>
           <li>
-            <svg width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M12.501 3.161c2.936-2.636 7.474-2.549 10.302.285a7.5 7.5 0 0 1 .295 10.295l-10.6 10.615L1.902 13.74a7.5 7.5 0 0 1 10.6-10.58Zm8.532 2.051a4.997 4.997 0 0 0-6.862-.19l-1.669 1.497-1.67-1.497a4.999 4.999 0 0 0-6.867.193 4.999 4.999 0 0 0-.24 6.813l8.775 8.79 8.775-8.788a5 5 0 0 0-.242-6.818Z" fill="#fff"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h25v25H0z"/></clipPath></defs></svg>
+            <router-link :to="{name: 'FavoritePage'}">
+              <svg width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M12.501 3.161c2.936-2.636 7.474-2.549 10.302.285a7.5 7.5 0 0 1 .295 10.295l-10.6 10.615L1.902 13.74a7.5 7.5 0 0 1 10.6-10.58Zm8.532 2.051a4.997 4.997 0 0 0-6.862-.19l-1.669 1.497-1.67-1.497a4.999 4.999 0 0 0-6.867.193 4.999 4.999 0 0 0-.24 6.813l8.775 8.79 8.775-8.788a5 5 0 0 0-.242-6.818Z" fill="#fff"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h25v25H0z"/></clipPath></defs></svg>
+            </router-link>
           </li>
           <li>
             <svg width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M3.817 5.48 0 1.666 1.665 0l3.816 3.817h17.937a1.177 1.177 0 0 1 1.128 1.514l-2.825 9.415a1.177 1.177 0 0 1-1.127.84H6.17v2.353h12.946v2.354H4.993a1.177 1.177 0 0 1-1.176-1.177V5.48Zm2.353.69v7.061h13.548l2.119-7.06H6.17ZM5.582 25a1.766 1.766 0 1 1 0-3.531 1.766 1.766 0 0 1 0 3.531Zm14.122 0a1.765 1.765 0 1 1 0-3.53 1.765 1.765 0 0 1 0 3.53Z" fill="#fff"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h25v25H0z"/></clipPath></defs></svg>

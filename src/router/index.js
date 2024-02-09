@@ -6,6 +6,7 @@ import LoginPage from "../pages/LoginPage.vue";
 import RegisterPage from "../pages/RegisterPage.vue";
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import CatalogPage from "@/pages/catalog/CatalogPage.vue";
+import FavoritePage from "@/pages/FavoritePage.vue";
 
 const routes = [
     {
@@ -43,6 +44,11 @@ const routes = [
                 path: '/catalog',
                 component: CatalogPage,
                 name: 'CatalogPage',
+            },
+            {
+                path: '/favorite',
+                component: FavoritePage,
+                name: 'FavoritePage',
             }
         ]
     }

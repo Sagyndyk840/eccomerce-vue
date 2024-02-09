@@ -49,25 +49,12 @@ export default {
                          :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
 
           </div>
-<!--          <ul id="pagination">-->
-<!--            <li><a class="" href="#">«</a></li>-->
-<!--            <li><a href="#">1</a></li>-->
-<!--            <li><a href="#" class="active">2</a></li>-->
-<!--            <li><a href="#">3</a></li>-->
-<!--            <li><a href="#">4</a></li>-->
-<!--            <li><a href="#">5</a></li>-->
-<!--            <li><a href="#">6</a></li>-->
-<!--            <li><a href="#">7</a></li>-->
-<!--            <li><a href="#">»</a></li>-->
-            <vue-awesome-paginate
-                :total-items="50"
-                :items-per-page="5"
-                :max-pages-shown="5"
-                v-model="currentPage"
-
-            />
-<!--          </ul>-->
-
+          <vue-awesome-paginate
+              :total-items="50"
+              :items-per-page="5"
+              :max-pages-shown="5"
+              v-model="currentPage"
+          />
         </div>
       </div>
     </div>
