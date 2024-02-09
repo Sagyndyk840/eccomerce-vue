@@ -33,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <input :type="type" class="input" :class="[className, {'error' : errors.length}]" :placeholder="placeholder" :value="value" @input="updateInput"/>
+  <input :type="type" class="input" :class="[className, {'error' : errors && errors.length}]" :placeholder="placeholder" :value="value" @input="updateInput"/>
   <p v-for="error of errors"
      :key="error.$uid" class="error-text">{{error.$message}}</p>
 </template>
