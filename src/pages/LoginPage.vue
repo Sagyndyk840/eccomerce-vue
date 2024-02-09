@@ -21,6 +21,7 @@ export default {
   methods: {
     login () {
       this.v$.$validate()
+      if (this.v$.$error) return
       console.log(this.form)
     }
   },
