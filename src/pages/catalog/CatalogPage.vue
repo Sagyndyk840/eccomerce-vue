@@ -4,7 +4,12 @@ import CatalogListRoute from "@/components/CatalogListRoute.vue";
 
 export default {
   name: "CatalogPage",
-  components: {CatalogListRoute, ProductItem}
+  components: {CatalogListRoute, ProductItem},
+  methods: {
+    product () {
+      console.log("Product")
+    }
+  }
 }
 </script>
 
@@ -18,27 +23,25 @@ export default {
         <div class="catalog-right">
           <div class="filter"></div>
           <div class="catalog-products">
-            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+            <ProductItem @favorite="product" title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
                          :sizes="['XS', 'XL', 'SM', 'MD']"
-                         :colors="['#871212', '#F1DDAA']" />
-            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
+            <ProductItem @favorite="product" title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
                          :sizes="['XS', 'XL', 'SM', 'MD']"
-                         :colors="['#871212', '#F1DDAA']" />
-            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
+            <ProductItem @favorite="product" title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
                          :sizes="['XS', 'XL', 'SM', 'MD']"
-                         :colors="['#871212', '#F1DDAA']" />
-            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
+            <ProductItem @favorite="product" title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
                          :sizes="['XS', 'XL', 'SM', 'MD']"
-                         :colors="['#871212', '#F1DDAA']" />
-            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
+            <ProductItem @favorite="product" title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
                          :sizes="['XS', 'XL', 'SM', 'MD']"
-                         :colors="['#871212', '#F1DDAA']" />
-            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
+                         :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
+            <ProductItem @favorite="product" title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
                          :sizes="['XS', 'XL', 'SM', 'MD']"
-                         :colors="['#871212', '#F1DDAA']" />
-            <ProductItem title="Белая куртка" img="src/assets/images/png/product-1.png" new-product price="2900"
-                         :sizes="['XS', 'XL', 'SM', 'MD']"
-                         :colors="['#871212', '#F1DDAA']" />
+                         :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
+
           </div>
           <ul id="pagination">
             <li><a class="" href="#">«</a></li>
