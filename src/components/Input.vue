@@ -19,6 +19,10 @@ export default {
       default: "",
       type: String,
     },
+    name: {
+      default: "",
+      type: String,
+    },
     errors: {
       type: Array,
       required: false,
