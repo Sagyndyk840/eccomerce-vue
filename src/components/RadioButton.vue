@@ -23,6 +23,15 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    value: {
+      default: "",
+      type: String,
+    },
+  },
+  methods: {
+    updateRadio(event) {
+      this.$emit("update:value", event.target.value);
     }
   }
 }
@@ -30,7 +39,7 @@ export default {
 
 <template>
   <div class="radio-item">
-    <input :name="name" :id="id" type="radio" class="radio-item-input" :checked="checked" :disabled="disabled">
+    <input :value="value" @input="updateRadio" :name="name" :id="id" type="radio" class="radio-item-input" :checked="checked" :disabled="disabled">
     <label :for="id" class="radio-item-title">
       {{ description }}
     </label>
