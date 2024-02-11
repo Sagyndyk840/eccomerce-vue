@@ -1,10 +1,11 @@
 <script>
 import Button from "@/components/Button.vue";
 import Input from "@/components/Input.vue";
+import RadioButton from "@/components/RadioButton.vue";
 
 export default {
   name: "OrderList",
-  components: {Input, Button}
+  components: {RadioButton, Input, Button}
 }
 </script>
 
@@ -28,30 +29,18 @@ export default {
               Способ доставки:
             </h2>
             <div class="order-left__personal">
-              <div class="radio-item">
-                <input name="address" type="radio" class="radio-item-input">
-                <h2 class="radio-item-title">
-                  Самовывоз - вул. Большая Васильковская 14(м. Льва Толстого)
-                </h2>
-              </div>
-              <div class="radio-item">
-                <input name="address" type="radio" class="radio-item-input">
-                <h2 class="radio-item-title">
-                  Украпочта / 1-3 недели / 30$
-                </h2>
-              </div>
-              <div class="radio-item">
-                <input name="address" type="radio" class="radio-item-input">
-                <h2 class="radio-item-title">
-                  Новая Почта
-                </h2>
-              </div>
-              <div class="radio-item">
-                <input name="address" type="radio" class="radio-item-input">
-                <h2 class="radio-item-title">
-                  DHL / 3-7 дней / 60$
-                </h2>
-              </div>
+              <RadioButton
+                  description="Самовывоз - вул. Большая Васильковская 14(м. Льва Толстого)"
+                  name-id="address" />
+              <RadioButton
+                  description="Украпочта / 1-3 недели / 30$"
+                  name-id="post" />
+              <RadioButton
+                  description="Новая Почта"
+                  name-id="new-post" />
+              <RadioButton
+                  description="DHL / 3-7 дней / 60$"
+                  name-id="dhl" />
             </div>
             <h2 class="order-left__title">
               Адрес доставки:
