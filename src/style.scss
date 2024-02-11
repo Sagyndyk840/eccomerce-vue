@@ -133,3 +133,16 @@ button {
   color: white;
   opacity: .7;
 }
+
+.component-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.m {
+  &-t {
+    &-10 {
+      margin-top: 10px;
+    }
+  }
+}

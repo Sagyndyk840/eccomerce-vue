@@ -40,17 +40,14 @@ export default {
 </script>
 
 <template>
-  <div class="input-form">
+  <div class="component-form">
     <input :name="name" :type="type" class="input" :class="[className, {'error' : errors && errors.length}]" :placeholder="placeholder" :value="value" @input="updateInput"/>
     <ErrorMessage  :errors="errors"/>
   </div>
 </template>
 
 <style scoped lang="scss">
-.input-form {
-  display: flex;
-  flex-direction: column;
-}
+
 .input {
   border: 0.5px solid #252525;
   color: rgba(37, 37, 37, 0.50);

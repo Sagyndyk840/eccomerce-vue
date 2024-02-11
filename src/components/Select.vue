@@ -1,6 +1,9 @@
 <script>
+import ErrorMessage from "@/components/ErrorMessage.vue";
+
 export default {
   name: "Select",
+  components: {ErrorMessage},
   props: {
     className: {
       type: String,
@@ -13,6 +16,13 @@ export default {
       default: "",
       type: [String, Number],
     },
+    errors: {
+      type: Array,
+      required: false,
+    },
+    width: {
+      type: String
+    }
   },
   methods: {
     handleSelectChange(event) {
@@ -23,15 +33,18 @@ export default {
 </script>
 
 <template>
-  <select @change="handleSelectChange"  class="select" :class="className">
-    <option
-        v-for="option in options"
-        :key="option.value"
-        :value="option.value"
-        :selected="option.selected"
-        :disabled="option.disabled"
-    >{{ option.label }}</option>
-  </select>
+  <div class="component-form" :style="{width: width}">
+    <select @change="handleSelectChange"  class="select" :class="className">
+      <option
+          v-for="option in options"
+          :key="option.value"
+          :value="option.value"
+          :selected="option.selected"
+          :disabled="option.disabled"
+      >{{ option.label }}</option>
+    </select>
+    <ErrorMessage :errors="errors" />
+  </div>
 </template>
 
 <style scoped lang="scss">

@@ -1,19 +1,43 @@
 <script>
 import Button from "@/components/Button.vue";
 import Select from "@/components/Select.vue";
+import {useVuelidate} from "@vuelidate/core";
 
 export default {
   name: "ProductPage",
   components: {Select, Button},
+  setup () {
+    return { v$: useVuelidate() }
+  },
   data () {
     return {
-      selectSize: '',
       selectOptions: [
         { value: 'size', label: 'Выберите размер', disabled: true, selected: true },
         { value: 'XS', label: 'XS' },
         { value: 'S', label: 'S' },
         { value: 'M', label: 'M' },
       ],
+      colors: [
+        {
+          id: 1,
+          color: '#F1DDAA',
+          title: 'Цвет: Кофе с молоком меланж'
+        },
+        {
+          id: 2,
+          color: '#6F83A4',
+          title: 'Цвет: Синый'
+        },
+        {
+          id: 3,
+          color: 'white',
+          title: 'Цвет: Белый'
+        }
+      ],
+      form: {
+        selectSize: '',
+        changeColor: '',
+      }
     }
   },
 }
@@ -32,12 +56,17 @@ export default {
           </h2>
           <div class="single-product__price price">3150 грн</div>
           <div class="colors-radio single-product__colors">
-            <input type="radio" name="color" class="color-radio single-product__color" style="background-color: #F1DDAA;">
-            <input type="radio" name="color" class="color-radio single-product__color" style="background-color: #6F83A4;">
-            <input type="radio" name="color" class="color-radio single-product__color" style="background-color: white;">
+            <input v-model="form.changeColor" v-for="color in colors" :key="color.id"
+                   type="radio"
+                   :value="color"
+                   name="color"
+                   class="color-radio single-product__color"
+                   :style="{backgroundColor: color.color}">
           </div>
-          <div class="color-title">Цвет: Кофе с молоком меланж</div>
-          <Select v-model:value="selectSize" :options="selectOptions"  class-name="single-product__select"/>
+          <div v-for="color in colors" :key="color.id" class="">
+            <div v-if="color.id === form.changeColor.id" class="color-title">{{ color.title }}</div>
+          </div>
+          <Select v-model:value="form.selectSize" :options="selectOptions"  class-name="single-product__select m-t-10" width="100%"/>
           <div class="single-product__group--btns">
             <Button class-name="bg-yellow color-white" title="В КОРЗИНУ"/>
             <Button class-name="bg-white color-black" title="В ИЗБРАННОЕ"/>
