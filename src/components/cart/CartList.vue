@@ -11,9 +11,20 @@ export default {
   <section class="cart-list">
     <div class="container">
       <div class="cart-list__inner">
-        <CartItem />
-        <CartItem />
-        <CartItem />
+        <CartItem
+            article="1589956"
+            color="#E0BEA2"
+            img="src/assets/images/png/single-product.png"
+            price="9450"
+            size="XL"
+            title="Кремовое пальто" />
+        <CartItem
+            article="1589956"
+            color="#E0BEA2"
+            img="src/assets/images/png/single-product.png"
+            price="9450"
+            size="XL"
+            title="Кремовое пальто" />
       </div>
     </div>
   </section>

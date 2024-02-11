@@ -1,6 +1,32 @@
 <script>
 export default {
-  name: "CartItem"
+  name: "CartItem",
+  props: {
+    img: {
+      type: String,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    article: {
+      type: String,
+      required: true
+    },
+    color: {
+      type: String,
+      required: true
+    },
+    size: {
+      type: String,
+      required: true
+    },
+    price: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 
@@ -8,19 +34,19 @@ export default {
   <div class="cart-item">
     <div class="cart-item__first">
       <div class="cart-item__image">
-        <img src="@assets/images/png/single-product.png" alt="">
+        <img :src="img" :alt="title">
       </div>
       <div class="cart-item__title">
-        <div class="cart-item__title--top">арт. 1589956</div>
-        <div class="cart-item__title--bottom">Кремовое пальто</div>
+        <div class="cart-item__title--top">арт. {{ article }}</div>
+        <div class="cart-item__title--bottom">{{ title }}</div>
       </div>
     </div>
     <div class="cart-item__colors">
-      <div class="cart-item__color" style="background-color: #F1DDAA;">
+      <div class="cart-item__color" :style="{'background-color': color}">
       </div>
     </div>
     <div class="cart-item__size">
-      L
+      {{ size }}
     </div>
     <div class="cart-item__counter">
       <button>
@@ -50,7 +76,7 @@ export default {
       </button>
     </div>
     <div class="cart-item__price">
-      9450 грн
+      {{ price }} грн
     </div>
     <div class="cart-item__delete">
       <button>
