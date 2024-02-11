@@ -93,7 +93,6 @@ export default {
   &__color {
     height: 20px;
     width: 20px;
-    all: revert;
     margin: 0 5px 0 0;
 
     &:last-child {
