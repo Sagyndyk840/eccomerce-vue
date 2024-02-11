@@ -5,7 +5,21 @@ import RadioButton from "@/components/RadioButton.vue";
 
 export default {
   name: "OrderList",
-  components: {RadioButton, Input, Button}
+  components: {RadioButton, Input, Button},
+  data () {
+    return {
+      changeAddress: '',
+      changePayment: '',
+      deliveryMethods: [
+        {
+          description: '',
+          name: '',
+          id: '',
+          value: '',
+        },
+      ]
+    }
+  }
 }
 </script>
 
@@ -26,19 +40,28 @@ export default {
               <Input type="text"  placeholder="Ваш телефон*" />
             </div>
             <h2 class="order-left__title">
-              Способ доставки:
+              Способ доставки:  {{changeAddress}}
             </h2>
             <div class="order-left__personal">
               <RadioButton
+                  :checked="true"
+                  value="address"
+                  v-model:value="changeAddress"
                   description="Самовывоз - вул. Большая Васильковская 14(м. Льва Толстого)"
                   name="address"  id="address"/>
               <RadioButton
+                  value="post"
+                  v-model:value="changeAddress"
                   description="Украпочта / 1-3 недели / 30$"
                   name="address" id="post"/>
               <RadioButton
+                  value="new-post"
+                  v-model:value="changeAddress"
                   description="Новая Почта"
                   name="address" id="new-post"/>
               <RadioButton
+                  value="dhl"
+                  v-model:value="changeAddress"
                   description="DHL / 3-7 дней / 60$"
                   name="address" id="dhl"/>
             </div>

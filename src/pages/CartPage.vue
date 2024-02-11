@@ -4,7 +4,7 @@ import OrderList from "@/components/order/OrderList.vue";
 
 export default {
   name: "CartPage",
-  components: {OrderList, CartList}
+  components: {OrderList, CartList},
 }
 </script>
 
