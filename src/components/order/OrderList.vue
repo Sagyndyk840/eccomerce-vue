@@ -10,14 +10,6 @@ export default {
     return {
       changeAddress: '',
       changePayment: '',
-      deliveryMethods: [
-        {
-          description: '',
-          name: '',
-          id: '',
-          value: '',
-        },
-      ]
     }
   }
 }
@@ -40,7 +32,7 @@ export default {
               <Input type="text"  placeholder="Ваш телефон*" />
             </div>
             <h2 class="order-left__title">
-              Способ доставки:  {{changeAddress}}
+              Способ доставки:
             </h2>
             <div class="order-left__personal">
               <RadioButton
@@ -76,24 +68,21 @@ export default {
               Вы можете оплатить покупку одним из ниже перечисленных способов:
             </h2>
             <div class="order-left__personal">
-              <div class="radio-item">
-                <input name="payment" type="radio" class="radio-item-input">
-                <h2 class="radio-item-title">
-                  Полная предоплата через Приват 24
-                </h2>
-              </div>
-              <div class="radio-item">
-                <input name="payment" type="radio" class="radio-item-input">
-                <h2 class="radio-item-title">
-                  Денежным переводом  Visa/MasterCard
-                </h2>
-              </div>
-              <div class="radio-item">
-                <input name="payment" type="radio" class="radio-item-input">
-                <h2 class="radio-item-title">
-                  Наложенным платежом в отделении Новой Почты
-                </h2>
-              </div>
+              <RadioButton
+                  value="privat-payment"
+                  v-model:value="changePayment"
+                  description="Полная предоплата через Приват 24"
+                  name="payment" id="privat-payment"/>
+              <RadioButton
+                  value="visa-payment"
+                  v-model:value="changePayment"
+                  description="Денежным переводом  Visa/MasterCard"
+                  name="payment" id="visa-payment"/>
+              <RadioButton
+                  value="new-post-payment"
+                  v-model:value="changePayment"
+                  description="Наложенным платежом в отделении Новой Почты"
+                  name="payment" id="new-post-payment"/>
             </div>
           </div>
           <div class="order-right">
