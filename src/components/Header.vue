@@ -41,7 +41,9 @@ export default {
             </router-link>
           </li>
           <li>
-            <svg width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M3.817 5.48 0 1.666 1.665 0l3.816 3.817h17.937a1.177 1.177 0 0 1 1.128 1.514l-2.825 9.415a1.177 1.177 0 0 1-1.127.84H6.17v2.353h12.946v2.354H4.993a1.177 1.177 0 0 1-1.176-1.177V5.48Zm2.353.69v7.061h13.548l2.119-7.06H6.17ZM5.582 25a1.766 1.766 0 1 1 0-3.531 1.766 1.766 0 0 1 0 3.531Zm14.122 0a1.765 1.765 0 1 1 0-3.53 1.765 1.765 0 0 1 0 3.53Z" fill="#fff"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h25v25H0z"/></clipPath></defs></svg>
+            <router-link :to="{name: 'CartPage'}">
+              <svg width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M3.817 5.48 0 1.666 1.665 0l3.816 3.817h17.937a1.177 1.177 0 0 1 1.128 1.514l-2.825 9.415a1.177 1.177 0 0 1-1.127.84H6.17v2.353h12.946v2.354H4.993a1.177 1.177 0 0 1-1.176-1.177V5.48Zm2.353.69v7.061h13.548l2.119-7.06H6.17ZM5.582 25a1.766 1.766 0 1 1 0-3.531 1.766 1.766 0 0 1 0 3.531Zm14.122 0a1.765 1.765 0 1 1 0-3.53 1.765 1.765 0 0 1 0 3.53Z" fill="#fff"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h25v25H0z"/></clipPath></defs></svg>
+            </router-link>
           </li>
         </ul>
       </div>

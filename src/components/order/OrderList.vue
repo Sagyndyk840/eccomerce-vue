@@ -57,8 +57,8 @@ export default {
               Адрес доставки:
             </h2>
             <div class="order-left__personal">
-              <input type="text" class="input" placeholder="Город*" />
-              <input type="text" class="input" placeholder="Отделение почты*" />
+              <Input type="text"  placeholder="Город*" />
+              <Input type="text"  placeholder="Отделение почты*" />
             </div>
             <h2 class="order-left__title">
               Вы можете оплатить покупку одним из ниже перечисленных способов:
