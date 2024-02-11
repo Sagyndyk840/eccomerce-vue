@@ -2,14 +2,69 @@
 import Button from "@/components/Button.vue";
 import Input from "@/components/Input.vue";
 import RadioButton from "@/components/RadioButton.vue";
+import {useVuelidate} from "@vuelidate/core";
+import {required, email, helpers, minLength, sameAs} from '@vuelidate/validators'
+import ErrorMessage from "@/components/ErrorMessage.vue";
 
 export default {
   name: "OrderList",
-  components: {RadioButton, Input, Button},
+  components: {ErrorMessage, RadioButton, Input, Button},
+  setup () {
+    return { v$: useVuelidate() }
+  },
   data () {
     return {
       changeAddress: '',
       changePayment: '',
+      order: {
+        fio: '',
+        email: '',
+        phone: '',
+        city: '',
+        addressPost: ''
+      }
+    }
+  },
+  methods: {
+    send () {
+      this.v$.$validate()
+      if (this.v$.$error) return
+      console.log(this.form)
+    }
+  },
+  validations () {
+    return {
+      order: {
+        email: {
+          email : helpers.withMessage('Вы ввели неверный email', email),
+          required: helpers.withMessage('Пожалуйста, заполните обязательное поле', required),
+          $autoDirty: true
+        },
+        fio: {
+          required: helpers.withMessage('Пожалуйста, заполните обязательное поле', required),
+          $autoDirty: true
+        },
+        phone: {
+          required: helpers.withMessage('Пожалуйста, заполните обязательное поле', required),
+          $autoDirty: true
+        },
+        city: {
+          required: helpers.withMessage('Пожалуйста, заполните обязательное поле', required),
+          $autoDirty: true
+        },
+        addressPost: {
+          required: helpers.withMessage('Пожалуйста, заполните обязательное поле', required),
+          $autoDirty: true
+        },
+      },
+      changeAddress: {
+        required: helpers.withMessage('Пожалуйста, выберите обязательное поле', required),
+        $autoDirty: false
+      },
+      changePayment: {
+        required: helpers.withMessage('Пожалуйста, выберите обязательное поле', required),
+        $autoDirty: false
+      },
     }
   }
 }
@@ -19,24 +74,22 @@ export default {
   <section class="order">
     <div class="container">
       <h2 class="title order-title">Оформление заказа</h2>
-      <form action="">
+      <form @submit.prevent="send">
         <div class="order-inner">
           <div class="order-left">
             <h2 class="order-left__title">
               Персональные данные:
             </h2>
             <div class="order-left__personal">
-              <Input type="text"  placeholder="Ваше имя*" />
-              <Input type="text"  placeholder="Ваша фамилия*" />
-              <Input type="text"  placeholder="Ваш e-mail*" />
-              <Input type="text"  placeholder="Ваш телефон*" />
+              <Input type="text"  placeholder="Ваше ФИО*" v-model:value="order.fio" :errors="v$.order.fio.$errors"/>
+              <Input type="text"  placeholder="Ваш e-mail*" v-model:value="order.email" :errors="v$.order.email.$errors"/>
+              <Input type="text"  placeholder="Ваш телефон*" v-model:value="order.phone" :errors="v$.order.phone.$errors"/>
             </div>
             <h2 class="order-left__title">
               Способ доставки:
             </h2>
             <div class="order-left__personal">
               <RadioButton
-                  :checked="true"
                   value="address"
                   v-model:value="changeAddress"
                   description="Самовывоз - вул. Большая Васильковская 14(м. Льва Толстого)"
@@ -57,12 +110,13 @@ export default {
                   description="DHL / 3-7 дней / 60$"
                   name="address" id="dhl"/>
             </div>
+            <ErrorMessage :errors="v$.changeAddress.$errors"/>
             <h2 class="order-left__title"  v-if="changeAddress === 'address'">
               Адрес доставки:
             </h2>
             <div class="order-left__personal" v-if="changeAddress === 'address'">
-              <Input type="text"  placeholder="Город*" />
-              <Input type="text"  placeholder="Отделение почты*" />
+              <Input v-model:value="order.city"  :errors=" v$.order.city.$errors" type="text"  placeholder="Город*" />
+              <Input v-model:value="order.addressPost" :errors="v$.order.addressPost.$errors" type="text"  placeholder="Отделение почты*" />
             </div>
             <h2 class="order-left__title">
               Вы можете оплатить покупку одним из ниже перечисленных способов:
@@ -84,6 +138,8 @@ export default {
                   description="Наложенным платежом в отделении Новой Почты"
                   name="payment" id="new-post-payment"/>
             </div>
+            <ErrorMessage :errors="v$.changePayment.$errors"/>
+
           </div>
           <div class="order-right">
             <ul>
@@ -109,7 +165,7 @@ export default {
               </div>
             </div>
 
-            <Button class-name="bg-yellow color-white btn-cart" title="ОФОРМИТЬ ЗАКАЗ"></Button>
+            <Button type="submit" class-name="bg-yellow color-white btn-cart" title="ОФОРМИТЬ ЗАКАЗ"></Button>
             <div class="policy-text">
               Нажимая на кнопку «оплатить заказ», я принимаю условия <a href="">публичной оферты и политики конфиденциальности</a>
             </div>

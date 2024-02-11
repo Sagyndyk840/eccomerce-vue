@@ -1,6 +1,9 @@
 <script>
+import ErrorMessage from "@/components/ErrorMessage.vue";
+
 export default {
   name: "Input",
+  components: {ErrorMessage},
   props: {
     type: {
       default: "text",
@@ -37,12 +40,17 @@ export default {
 </script>
 
 <template>
-  <input :name="name" :type="type" class="input" :class="[className, {'error' : errors && errors.length}]" :placeholder="placeholder" :value="value" @input="updateInput"/>
-  <p v-for="error of errors"
-     :key="error.$uid" class="error-text">{{error.$message}}</p>
+  <div class="input-form">
+    <input :name="name" :type="type" class="input" :class="[className, {'error' : errors && errors.length}]" :placeholder="placeholder" :value="value" @input="updateInput"/>
+    <ErrorMessage  :errors="errors"/>
+  </div>
 </template>
 
 <style scoped lang="scss">
+.input-form {
+  display: flex;
+  flex-direction: column;
+}
 .input {
   border: 0.5px solid #252525;
   color: rgba(37, 37, 37, 0.50);
@@ -62,13 +70,6 @@ export default {
     color: rgba(37, 37, 37, 0.50);
   }
 
-}
-.error-text {
-  color: #FFA4A4 !important;
-  font-family: "Raleway", serif;
-  font-size: 16px;
-  font-weight: 200;
-  margin-bottom: 16px;
 }
 
 .error {
