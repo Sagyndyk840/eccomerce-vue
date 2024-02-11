@@ -3,7 +3,7 @@ import Button from "@/components/Button.vue";
 import Input from "@/components/Input.vue";
 import RadioButton from "@/components/RadioButton.vue";
 import {useVuelidate} from "@vuelidate/core";
-import {required, email, helpers, minLength, sameAs} from '@vuelidate/validators'
+import {required, email, helpers, minLength, sameAs, requiredIf} from '@vuelidate/validators'
 import ErrorMessage from "@/components/ErrorMessage.vue";
 
 export default {
@@ -29,7 +29,7 @@ export default {
     send () {
       this.v$.$validate()
       if (this.v$.$error) return
-      console.log(this.form)
+      console.log(this.order)
     }
   },
   validations () {
@@ -49,16 +49,16 @@ export default {
           $autoDirty: true
         },
         city: {
-          required: helpers.withMessage('Пожалуйста, заполните обязательное поле', required),
+          requiredIf: helpers.withMessage('Пожалуйста, заполните обязательное поле', requiredIf(this.changeAddress === 'address')),
           $autoDirty: true
         },
         addressPost: {
-          required: helpers.withMessage('Пожалуйста, заполните обязательное поле', required),
+          requiredIf: helpers.withMessage('Пожалуйста, заполните обязательное поле', requiredIf(this.changeAddress === 'address')),
           $autoDirty: true
         },
       },
       changeAddress: {
-        required: helpers.withMessage('Пожалуйста, выберите обязательное поле', required),
+        required: helpers.withMessage('Пожалуйста, выберите обязательное поле',  required),
         $autoDirty: false
       },
       changePayment: {
@@ -115,7 +115,10 @@ export default {
               Адрес доставки:
             </h2>
             <div class="order-left__personal" v-if="changeAddress === 'address'">
-              <Input v-model:value="order.city"  :errors=" v$.order.city.$errors" type="text"  placeholder="Город*" />
+              <Input v-model:value="order.city"
+                     :errors=" v$.order.city.$errors"
+                     type="text"
+                     placeholder="Город*" />
               <Input v-model:value="order.addressPost" :errors="v$.order.addressPost.$errors" type="text"  placeholder="Отделение почты*" />
             </div>
             <h2 class="order-left__title">
