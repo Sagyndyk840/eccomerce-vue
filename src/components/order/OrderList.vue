@@ -57,10 +57,10 @@ export default {
                   description="DHL / 3-7 дней / 60$"
                   name="address" id="dhl"/>
             </div>
-            <h2 class="order-left__title">
+            <h2 class="order-left__title"  v-if="changeAddress === 'address'">
               Адрес доставки:
             </h2>
-            <div class="order-left__personal">
+            <div class="order-left__personal" v-if="changeAddress === 'address'">
               <Input type="text"  placeholder="Город*" />
               <Input type="text"  placeholder="Отделение почты*" />
             </div>
