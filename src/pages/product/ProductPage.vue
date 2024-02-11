@@ -1,9 +1,20 @@
 <script>
 import Button from "@/components/Button.vue";
+import Select from "@/components/Select.vue";
 
 export default {
   name: "ProductPage",
-  components: {Button}
+  components: {Select, Button},
+  data () {
+    return {
+      selectSize: '',
+      selectOptions: [
+        { value: 'XS', label: 'Extra Small' },
+        { value: 'S', label: 'Small' },
+        { value: 'M', label: 'Medium' },
+      ],
+    }
+  },
 }
 </script>
 
@@ -25,11 +36,7 @@ export default {
             <input type="radio" name="color" class="color-radio single-product__color" style="background-color: white;">
           </div>
           <div class="color-title">Цвет: Кофе с молоком меланж</div>
-          <select  class="select single-product__select">
-            <option selected value="Выберите размер" disabled>Выберите размер</option>
-            <option value="XS" >XS</option>
-            <option value="XXS" >XXS</option>
-          </select>
+          <Select v-model:value="selectSize" :options="selectOptions"  class-name="single-product__select"/>
           <div class="single-product__group--btns">
             <Button class-name="bg-yellow color-white" title="В КОРЗИНУ"/>
             <Button class-name="bg-white color-black" title="В ИЗБРАННОЕ"/>

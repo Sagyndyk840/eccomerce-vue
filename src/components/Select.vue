@@ -1,11 +1,37 @@
 <script>
 export default {
-  name: "Select"
+  name: "Select",
+  props: {
+    className: {
+      type: String,
+    },
+    options: {
+      type: Array,
+      required: true
+    },
+    value: {
+      default: "",
+      type: [String, Number],
+    },
+  },
+  methods: {
+    handleSelectChange(event) {
+      this.$emit("update:value", event.target.value);
+    },
+  },
 }
 </script>
 
 <template>
-
+  <select @change="handleSelectChange"  class="select" :class="className">
+    <option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+        :selected="option.selected"
+        :disabled="option.disabled"
+    >{{ option.label }}</option>
+  </select>
 </template>
 
 <style scoped lang="scss">
