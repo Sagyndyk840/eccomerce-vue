@@ -42,7 +42,9 @@ export default {
 <template>
   <div class="component-form">
     <input :name="name" :type="type" class="input" :class="[className, {'error' : errors && errors.length}]" :placeholder="placeholder" :value="value" @input="updateInput"/>
-    <ErrorMessage  :errors="errors"/>
+    <div class="m-b-10">
+      <ErrorMessage  :errors="errors"/>
+    </div>
   </div>
 </template>
 

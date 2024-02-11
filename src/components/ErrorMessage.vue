@@ -25,6 +25,5 @@ export default {
   font-family: "Raleway", serif;
   font-size: 16px;
   font-weight: 200;
-  margin-bottom: 16px;
 }
 </style>

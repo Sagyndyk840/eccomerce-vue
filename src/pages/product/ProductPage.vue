@@ -2,10 +2,12 @@
 import Button from "@/components/Button.vue";
 import Select from "@/components/Select.vue";
 import {useVuelidate} from "@vuelidate/core";
+import {email, helpers, minLength, required, sameAs} from "@vuelidate/validators";
+import ErrorMessage from "@/components/ErrorMessage.vue";
 
 export default {
   name: "ProductPage",
-  components: {Select, Button},
+  components: {ErrorMessage, Select, Button},
   setup () {
     return { v$: useVuelidate() }
   },
@@ -40,6 +42,28 @@ export default {
       }
     }
   },
+  methods: {
+    add () {
+      this.v$.$validate()
+      if (this.v$.$error) return
+      console.log(this.form)
+    }
+  },
+  validations () {
+    return {
+      form: {
+        selectSize: {
+          required: helpers.withMessage('Пожалуйста, выберите обязательное поле', required),
+          $autoDirty: true
+        },
+        changeColor: {
+          required: helpers.withMessage('Пожалуйста, выберите обязательное поле', required),
+          $autoDirty: true,
+        },
+
+      }
+    }
+  }
 }
 </script>
 
@@ -55,22 +79,28 @@ export default {
             Кремовое пальто
           </h2>
           <div class="single-product__price price">3150 грн</div>
-          <div class="colors-radio single-product__colors">
-            <input v-model="form.changeColor" v-for="color in colors" :key="color.id"
-                   type="radio"
-                   :value="color"
-                   name="color"
-                   class="color-radio single-product__color"
-                   :style="{backgroundColor: color.color}">
-          </div>
-          <div v-for="color in colors" :key="color.id" class="">
-            <div v-if="color.id === form.changeColor.id" class="color-title">{{ color.title }}</div>
-          </div>
-          <Select v-model:value="form.selectSize" :options="selectOptions"  class-name="single-product__select m-t-10" width="100%"/>
-          <div class="single-product__group--btns">
-            <Button class-name="bg-yellow color-white" title="В КОРЗИНУ"/>
-            <Button class-name="bg-white color-black" title="В ИЗБРАННОЕ"/>
-          </div>
+          <form @submit.prevent="add" class="w-100">
+            <div class="colors-radio single-product__colors">
+              <input v-model="form.changeColor" v-for="color in colors" :key="color.id"
+                     type="radio"
+                     :value="color"
+                     name="color"
+                     class="color-radio single-product__color"
+                     :style="{backgroundColor: color.color}">
+            </div>
+            <div v-for="color in colors" :key="color.id" class="">
+              <div v-if="color.id === form.changeColor.id" class="color-title">{{ color.title }}</div>
+            </div>
+            <div class="m-t-10">
+              <ErrorMessage :errors="v$.form.changeColor.$errors" />
+            </div>
+
+            <Select v-model:value="form.selectSize" :errors="v$.form.selectSize.$errors" :options="selectOptions"  class-name="single-product__select m-t-10" width="100%"/>
+            <div class="single-product__group--btns">
+              <Button type="submit" class-name="bg-yellow color-white" title="В КОРЗИНУ"/>
+              <Button class-name="bg-white color-black" title="В ИЗБРАННОЕ"/>
+            </div>
+          </form>
           <div class="single-product__information">
             <div class="single-product__information--item">
               <div class="single-product__information--title">Подробности</div>
@@ -155,7 +185,7 @@ export default {
   }
   .color-title {
     color: #E0BEA2;
-    text-align: center;
+    text-align: left;
     font-family: 'Raleway', serif;
     font-size: 14px;
     font-weight: 300;

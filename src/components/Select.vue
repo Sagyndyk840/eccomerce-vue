@@ -43,7 +43,9 @@ export default {
           :disabled="option.disabled"
       >{{ option.label }}</option>
     </select>
-    <ErrorMessage :errors="errors" />
+    <div class="m-t-10">
+      <ErrorMessage :errors="errors" />
+    </div>
   </div>
 </template>
 
