@@ -26,6 +26,19 @@ export default {
       type: String,
       required: true
     }
+  },
+  data () {
+    return {
+      count: 1,
+    }
+  },
+  methods: {
+    increment () {
+      this.count++
+    },
+    decrement () {
+      this.count--
+    }
   }
 }
 </script>
@@ -49,7 +62,7 @@ export default {
       {{ size }}
     </div>
     <div class="cart-item__counter">
-      <button>
+      <button @click="decrement">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
           <g clip-path="url(#clip0_1_1168)">
             <path d="M14 8.28577H9.71429H8.28571H4V9.71434H8.28571H9.71429H14V8.28577Z" fill="#E0BEA2"/>
@@ -61,8 +74,8 @@ export default {
           </defs>
         </svg>
       </button>
-      <input type="number" min="1" max="100" value="1">
-      <button>
+      <input v-model="count" type="number" min="1" max="100" value="1">
+      <button @click="increment">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
           <g clip-path="url(#clip0_1_1165)">
             <path d="M8.28571 8.28571V4H9.71429V8.28571H14V9.71429H9.71429V14H8.28571V9.71429H4V8.28571H8.28571Z" fill="#E0BEA2"/>
