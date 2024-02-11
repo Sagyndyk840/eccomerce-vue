@@ -31,16 +31,16 @@ export default {
             <div class="order-left__personal">
               <RadioButton
                   description="Самовывоз - вул. Большая Васильковская 14(м. Льва Толстого)"
-                  name-id="address" />
+                  name="address"  id="address"/>
               <RadioButton
                   description="Украпочта / 1-3 недели / 30$"
-                  name-id="post" />
+                  name="address" id="post"/>
               <RadioButton
                   description="Новая Почта"
-                  name-id="new-post" />
+                  name="address" id="new-post"/>
               <RadioButton
                   description="DHL / 3-7 дней / 60$"
-                  name-id="dhl" />
+                  name="address" id="dhl"/>
             </div>
             <h2 class="order-left__title">
               Адрес доставки:

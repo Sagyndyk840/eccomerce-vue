@@ -4,7 +4,11 @@ import Input from "@/components/Input.vue";
 export default {
   name: "RadioButton",
   props: {
-    nameId: {
+    name: {
+      type: String,
+      required: true
+    },
+    id: {
       type: String,
       required: true
     },
@@ -26,8 +30,8 @@ export default {
 
 <template>
   <div class="radio-item">
-    <input :name="nameId" :id="nameId" type="radio" class="radio-item-input" :checked="checked" :disabled="disabled">
-    <label :for="nameId" class="radio-item-title">
+    <input :name="name" :id="id" type="radio" class="radio-item-input" :checked="checked" :disabled="disabled">
+    <label :for="id" class="radio-item-title">
       {{ description }}
     </label>
   </div>
