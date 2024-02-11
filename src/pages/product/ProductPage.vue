@@ -37,7 +37,6 @@ export default {
             <input type="radio" name="color" class="color-radio single-product__color" style="background-color: white;">
           </div>
           <div class="color-title">Цвет: Кофе с молоком меланж</div>
-          {{selectSize}}
           <Select v-model:value="selectSize" :options="selectOptions"  class-name="single-product__select"/>
           <div class="single-product__group--btns">
             <Button class-name="bg-yellow color-white" title="В КОРЗИНУ"/>
