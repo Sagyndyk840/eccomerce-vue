@@ -29,6 +29,10 @@ export default {
     errors: {
       type: Array,
       required: false,
+    },
+    disabled: {
+      type: Boolean,
+      required:false
     }
   },
   methods: {
@@ -41,7 +45,7 @@ export default {
 
 <template>
   <div class="component-form">
-    <input :name="name" :type="type" class="input" :class="[className, {'error' : errors && errors.length}]" :placeholder="placeholder" :value="value" @input="updateInput"/>
+    <input :disabled="disabled" :name="name" :type="type" class="input" :class="[className, {'error' : errors && errors.length}]" :placeholder="placeholder" :value="value" @input="updateInput"/>
     <div class="m-b-10">
       <ErrorMessage  :errors="errors"/>
     </div>

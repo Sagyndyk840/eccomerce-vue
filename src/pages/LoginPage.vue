@@ -3,12 +3,16 @@ import Input from "@/components/Input.vue";
 import Button from "@/components/Button.vue";
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers, minLength } from '@vuelidate/validators'
+import {useAuthStore} from "@/stores/auth.js";
 
 export default {
   name: "LoginPage",
   components: {Button, Input},
   setup () {
-    return { v$: useVuelidate() }
+
+    const authStore = useAuthStore()
+
+    return { v$: useVuelidate(), authStore }
   },
   data () {
     return {
@@ -19,10 +23,10 @@ export default {
     }
   },
   methods: {
-    login () {
+    async login () {
       this.v$.$validate()
       if (this.v$.$error) return
-      console.log(this.form)
+      await this.authStore.auth('login', this.form)
     }
   },
   validations () {
@@ -54,13 +58,13 @@ export default {
       <div class="auth-card w-443">
         <h2 class="title auth-title">Авторизация </h2>
         <form @submit.prevent="login">
-          <Input type="text" class-name="w-443" placeholder="Ваш e-mail*" v-model:value="form.email" :errors="v$.form.email.$errors"/>
-          <Input type="password" class-name="w-443" placeholder="Ваш пароль*" v-model:value="form.password" :errors="v$.form.password.$errors"/>
+          <Input :disabled="authStore.loading" type="text" class-name="w-443" placeholder="Ваш e-mail*" v-model:value="form.email" :errors="v$.form.email.$errors"/>
+          <Input :disabled="authStore.loading" type="password" class-name="w-443" placeholder="Ваш пароль*" v-model:value="form.password" :errors="v$.form.password.$errors"/>
           <div class="auth-inner">
             <router-link :to="{name: 'HomePage'}" >Главная</router-link>
             <router-link :to="{name: 'RegisterPage'}" >Нет аккаунта?</router-link>
           </div>
-          <Button  class-name="w-443 bg-yellow color-white" title="ВОЙТИ" type="submit"/>
+          <Button :disabled="authStore.loading" class-name="w-443 bg-yellow color-white" title="ВОЙТИ" type="submit"/>
         </form>
       </div>
     </div>

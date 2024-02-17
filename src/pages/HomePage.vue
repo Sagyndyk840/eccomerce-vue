@@ -3,10 +3,15 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 
 export default {
+  setup () {
+  },
   components: {
     Swiper,
     SwiperSlide,
   },
+  async mounted  () {
+
+  }
 }
 </script>
 
