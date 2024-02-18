@@ -9,9 +9,6 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  async mounted  () {
-
-  }
 }
 </script>
 

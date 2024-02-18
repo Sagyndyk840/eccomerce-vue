@@ -4,7 +4,7 @@ import Header from "@/components/Header.vue";
 
 export default {
   name: "AuthLayout",
-  components: {Header, Footer}
+  components: {Header, Footer},
 }
 </script>
 

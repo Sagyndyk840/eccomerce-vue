@@ -4,9 +4,14 @@ import {notifyError, notifyDefault} from '@/methods/notify.js'
 export const useAuthStore = defineStore({
     id: 'auth',
     state: () => ({
-        loading: false
+        loading: false,
+        user: null,
+        isLoggedIn: false,
     }),
     getters: {
+        isAuthenticated (state) {
+            return state.isLoggedIn
+        },
     },
     actions: {
         async auth (url, form) {
@@ -19,8 +24,10 @@ export const useAuthStore = defineStore({
                 })
 
                 if (response.status === 200) {
+                    console.log(response.data)
                     notifyDefault(response.data.message)
                     sessionStorage.setItem('token', response.data.data.token)
+                    this.$router.push({ name: 'HomePage' }); // Redirect to Home
                 }
             } catch (e) {
                 console.log(e)
@@ -36,6 +43,26 @@ export const useAuthStore = defineStore({
                 this.loading = false
             }
         },
+
+        async refreshToken () {
+            try {
+
+            } catch (e) {
+
+            } finally {
+
+            }
+        },
+
+        async logout () {
+            try {
+
+            } catch (e) {
+
+            } finally {
+
+            }
+        }
 
     }
 })

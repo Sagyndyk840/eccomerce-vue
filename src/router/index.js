@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 import HomeLayout from "../layouts/HomeLayout.vue";
 import HomePage from "../pages/HomePage.vue";
 import AuthLayout from "../layouts/AuthLayout.vue";
@@ -14,6 +14,7 @@ const routes = [
     {
         path: '/',
         component: HomeLayout,
+        meta: {roles: ['guest', 'auth']},
         children: [
             {
                 path: '',
@@ -25,6 +26,7 @@ const routes = [
     {
         path: '/',
         component: AuthLayout,
+        meta: {roles: ['guest']},
         children: [
             {
                 path: '/login',
@@ -46,21 +48,25 @@ const routes = [
                 path: '/catalog',
                 component: CatalogPage,
                 name: 'CatalogPage',
+                meta: {roles: ['guest', 'auth']},
             },
             {
                 path: '/favorite',
                 component: FavoritePage,
                 name: 'FavoritePage',
+                meta: {roles: ['guest', 'auth']},
             },
             {
                 path: '/product',
                 component: ProductPage,
                 name: 'ProductPage',
+                meta: {roles: ['guest', 'auth']},
             },
             {
                 path: '/cart',
                 component: CartPage,
-                name: 'CartPage'
+                name: 'CartPage',
+                meta: {roles: ['auth']},
             }
         ]
     }
@@ -70,4 +76,22 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 })
+
+
+router.beforeEach((to, from, next) => {
+    let token = sessionStorage.getItem("token");
+
+    const allowedRoles = to.meta.roles; // Получение разрешенных ролей для маршрута
+
+    if (allowedRoles.includes("guest") && !token) {
+        return next()
+    }
+    else if (allowedRoles.includes("auth") && token) {
+        return next()
+    } else {
+        next();
+    }
+
+});
+
 export default router
