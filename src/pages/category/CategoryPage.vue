@@ -1,11 +1,11 @@
 <script>
 import ProductItem from "@/components/ProductItem.vue";
-import CatalogListRoute from "@/components/CatalogListRoute.vue";
+import CategoryListRoute from "@/components/CategoryListRoute.vue";
 import {VueAwesomePaginate} from "vue-awesome-paginate";
 
 export default {
-  name: "CatalogPage",
-  components: {VueAwesomePaginate, CatalogListRoute, ProductItem},
+  name: "CategoryPage",
+  components: {VueAwesomePaginate, CategoryListRoute, ProductItem},
   data () {
     return {
       currentPage: 1
@@ -24,7 +24,7 @@ export default {
     <div class="container">
       <div class="catalog-inner">
         <div class="catalog-left">
-          <CatalogListRoute />
+          <CategoryListRoute />
         </div>
         <div class="catalog-right">
           <div class="filter"></div>

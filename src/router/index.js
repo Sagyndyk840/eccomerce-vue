@@ -5,7 +5,7 @@ import AuthLayout from "../layouts/AuthLayout.vue";
 import LoginPage from "../pages/LoginPage.vue";
 import RegisterPage from "../pages/RegisterPage.vue";
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
-import CatalogPage from "@/pages/catalog/CatalogPage.vue";
+import CategoryPage from "@/pages/category/CategoryPage.vue";
 import FavoritePage from "@/pages/FavoritePage.vue";
 import ProductPage from "@/pages/product/ProductPage.vue";
 import CartPage from "@/pages/CartPage.vue";
@@ -45,9 +45,9 @@ const routes = [
         component: DefaultLayout,
         children: [
             {
-                path: '/catalog',
-                component: CatalogPage,
-                name: 'CatalogPage',
+                path: '/category',
+                component: CategoryPage,
+                name: 'CategoryPage',
                 meta: {roles: ['guest', 'auth']},
             },
             {
@@ -88,8 +88,6 @@ router.beforeEach((to, from, next) => {
     }
     else if (allowedRoles.includes("auth") && token) {
         return next()
-    } else {
-        next();
     }
 
 });

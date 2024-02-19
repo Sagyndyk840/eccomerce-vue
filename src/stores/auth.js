@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
 import { api } from '@/boot/axios.js'
 import {notifyError, notifyDefault} from '@/methods/notify.js'
+import router from '@/router'
+
 export const useAuthStore = defineStore({
     id: 'auth',
     state: () => ({
         loading: false,
-        user: null,
-        isLoggedIn: false,
     }),
     getters: {
         isAuthenticated (state) {
@@ -17,17 +17,12 @@ export const useAuthStore = defineStore({
         async auth (url, form) {
             try {
                 this.loading = true
-                let response = await api.post(url, form, {
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
+                let response = await api.post(url, form)
 
                 if (response.status === 200) {
-                    console.log(response.data)
                     notifyDefault(response.data.message)
                     sessionStorage.setItem('token', response.data.data.token)
-                    this.$router.push({ name: 'HomePage' }); // Redirect to Home
+                    router.push({name: 'HomePage'})
                 }
             } catch (e) {
                 console.log(e)

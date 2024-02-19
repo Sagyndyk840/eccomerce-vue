@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "CatalogListRoute"
+  name: "CategoryListRoute"
 }
 </script>
 

@@ -15,7 +15,7 @@ export default {
               <a href="">NEW</a>
             </li>
             <li>
-              <router-link :to="{name: 'CatalogPage'}">КАТАЛОГ</router-link>
+              <router-link :to="{name: 'CategoryPage'}">КАТАЛОГ</router-link>
             </li>
             <li>
               <a href="">О НАС</a>
