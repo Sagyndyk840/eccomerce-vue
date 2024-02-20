@@ -20,7 +20,7 @@ export default {
   <nav>
     <ul>
       <li v-for="category in categoryStore.categories" :key="category.id">
-        <a href="">{{ category.title }}</a>
+<!--        <router-link :to="{ name: 'CategoryPage', query: { id: 1 }}">{{ category.title }}</router-link>-->
       </li>
     </ul>
   </nav>
