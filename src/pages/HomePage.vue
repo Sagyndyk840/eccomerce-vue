@@ -1,14 +1,22 @@
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
+import {useCategoryStore} from "@/stores/categoies.js";
 
 export default {
   setup () {
+
+    const categoryStore = useCategoryStore()
+
+    return {categoryStore}
   },
   components: {
     Swiper,
     SwiperSlide,
   },
+  mounted() {
+    this.categoryStore.getCategories()
+  }
 }
 </script>
 
@@ -32,40 +40,10 @@ export default {
               :slides-per-view="4"
               :space-between="15"
           >
-            <swiper-slide>
+            <swiper-slide v-for="category in categoryStore.categories" :key="category.id">
               <a href="" class="catalog-item">
                 <img src="@assets/images/png/catalog-item.png" alt="">
-                <div class="catalog-item__title">Куртки</div>
-              </a>
-            </swiper-slide>
-            <swiper-slide>
-              <a href="" class="catalog-item">
-                <img src="@assets/images/png/catalog-item.png" alt="">
-                <div class="catalog-item__title">Куртки</div>
-              </a>
-            </swiper-slide>
-            <swiper-slide>
-              <a href="" class="catalog-item">
-                <img src="@assets/images/png/catalog-item.png" alt="">
-                <div class="catalog-item__title">Куртки</div>
-              </a>
-            </swiper-slide>
-            <swiper-slide>
-              <a href="" class="catalog-item">
-                <img src="@assets/images/png/catalog-item.png" alt="">
-                <div class="catalog-item__title">Куртки</div>
-              </a>
-            </swiper-slide>
-            <swiper-slide>
-              <a href="" class="catalog-item">
-                <img src="@assets/images/png/catalog-item.png" alt="">
-                <div class="catalog-item__title">Куртки</div>
-              </a>
-            </swiper-slide>
-            <swiper-slide>
-              <a href="" class="catalog-item">
-                <img src="@assets/images/png/catalog-item.png" alt="">
-                <div class="catalog-item__title">Куртки</div>
+                <div class="catalog-item__title">{{ category.title }}</div>
               </a>
             </swiper-slide>
           </swiper>

@@ -1,6 +1,17 @@
 <script>
+import {useCategoryStore} from "@/stores/categoies.js";
+
 export default {
-  name: "CategoryListRoute"
+  name: "CategoryListRoute",
+  setup () {
+
+    const categoryStore = useCategoryStore()
+
+    return {categoryStore}
+  },
+  mounted() {
+    this.categoryStore.getCategories()
+  }
 }
 </script>
 
@@ -8,26 +19,8 @@ export default {
   <h2 class="title catalog-left__title">Каталог</h2>
   <nav>
     <ul>
-      <li>
-        <a href="">New</a>
-      </li>
-      <li>
-        <a href="">Bestsellers</a>
-      </li>
-      <li>
-        <a href="">Верхняя одежда</a>
-      </li>
-      <li>
-        <a href="">Шубы</a>
-      </li>
-      <li>
-        <a href="">Тренчи</a>
-      </li>
-      <li>
-        <a href="">Пальто</a>
-      </li>
-      <li>
-        <a href="">Пуховики и жилеты</a>
+      <li v-for="category in categoryStore.categories" :key="category.id">
+        <a href="">{{ category.title }}</a>
       </li>
     </ul>
   </nav>
