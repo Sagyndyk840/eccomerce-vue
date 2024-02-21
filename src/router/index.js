@@ -43,7 +43,7 @@ const routes = [
         component: DefaultLayout,
         children: [
             {
-                path: '/category/:id',
+                path: '/category',
                 props: true,
                 name: 'CategoryPage',
                 component: () => import('@/pages/category/CategoryPage.vue'),
@@ -82,10 +82,10 @@ router.beforeEach((to, from, next) => {
 
     const allowedRoles = to.meta.roles; // Получение разрешенных ролей для маршрута
 
-    if (allowedRoles.includes("guest") && !token) {
+    if (allowedRoles && allowedRoles.includes("guest") && !token) {
         return next()
     }
-    else if (allowedRoles.includes("auth") && token) {
+    else if (allowedRoles && allowedRoles.includes("auth") && token) {
         return next()
     }
 

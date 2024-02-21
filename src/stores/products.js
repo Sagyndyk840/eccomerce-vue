@@ -6,7 +6,8 @@ export const useProductsStore = defineStore({
     state: () => ({
         loading: false,
         products: [],
-        pagination: {}
+        pagination: {},
+        currentPaginate: 1
     }),
     getters: {
     },
@@ -23,7 +24,9 @@ export const useProductsStore = defineStore({
                 let response = await api.get(url)
 
                 if (response.status === 200) {
-                    this.categories = response.data.data
+                    this.products = response.data.data
+                    this.pagination = response.data.meta
+                    console.log(response.data)
                 }
             } catch (e) {
 

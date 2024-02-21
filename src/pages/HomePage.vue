@@ -41,7 +41,7 @@ export default {
               :space-between="15"
           >
             <swiper-slide v-for="category in categoryStore.categories" :key="category.id">
-              <router-link  :to="{name: 'CategoryPage', params: {id: 1}}" class="catalog-item">
+              <router-link  :to="{name: 'CategoryPage'}" class="catalog-item">
                 <img src="@assets/images/png/catalog-item.png" alt="">
                 <div class="catalog-item__title">{{ category.title }}</div>
               </router-link>

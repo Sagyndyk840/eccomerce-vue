@@ -51,11 +51,11 @@ export default {
       {{ price }} грн
     </div>
     <div class="product-sizes">
-      <div v-for="size in sizes" :key="size" class="product-size size">{{ size }}</div>
+      <div v-for="size in sizes" :key="size" class="product-size size">{{ size.title }}</div>
     </div>
     <div class="product-colors">
       <div v-for="color in colors" :key="color" class="product-color color" :style="{
-        'background-color': color
+        'background-color': color.value
       }"></div>
     </div>
   </div>
