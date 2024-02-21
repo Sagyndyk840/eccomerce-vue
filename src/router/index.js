@@ -1,6 +1,4 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import HomeLayout from "../layouts/HomeLayout.vue";
-import HomePage from "../pages/HomePage.vue";
 import AuthLayout from "../layouts/AuthLayout.vue";
 import LoginPage from "../pages/LoginPage.vue";
 import RegisterPage from "../pages/RegisterPage.vue";
@@ -13,12 +11,12 @@ import CartPage from "@/pages/CartPage.vue";
 const routes = [
     {
         path: '/',
-        component: HomeLayout,
+        component: () => import('@/layouts/HomeLayout.vue'),
         meta: {roles: ['guest', 'auth']},
         children: [
             {
                 path: '',
-                component: HomePage,
+                component: () => import('@/pages/HomePage.vue'),
                 name: 'HomePage',
             }
         ]
@@ -30,12 +28,12 @@ const routes = [
         children: [
             {
                 path: '/login',
-                component: LoginPage,
+                component: () => import('@/pages/LoginPage.vue'),
                 name: 'LoginPage',
             },
             {
                 path: '/register',
-                component: RegisterPage,
+                component: () => import('@/pages/RegisterPage.vue'),
                 name: 'RegisterPage',
             }
         ]
@@ -45,26 +43,27 @@ const routes = [
         component: DefaultLayout,
         children: [
             {
-                path: '/category',
-                component: CategoryPage,
+                path: '/category/:id',
+                props: true,
                 name: 'CategoryPage',
+                component: () => import('@/pages/category/CategoryPage.vue'),
                 meta: {roles: ['guest', 'auth']},
             },
             {
                 path: '/favorite',
-                component: FavoritePage,
+                component: () => import('@/pages/FavoritePage.vue'),
                 name: 'FavoritePage',
                 meta: {roles: ['guest', 'auth']},
             },
             {
                 path: '/product',
-                component: ProductPage,
+                component: () => import('@/pages/product/ProductPage.vue'),
                 name: 'ProductPage',
                 meta: {roles: ['guest', 'auth']},
             },
             {
                 path: '/cart',
-                component: CartPage,
+                component: () => import('@/pages/CartPage.vue'),
                 name: 'CartPage',
                 meta: {roles: ['auth']},
             }

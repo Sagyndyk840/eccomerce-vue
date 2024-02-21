@@ -42,7 +42,7 @@ export default {
     <div class="container">
       <div class="catalog-inner">
         <div class="catalog-left">
-          <CategoryListRoute />
+<!--          <CategoryListRoute />-->
         </div>
         <div class="catalog-right">
           <div class="filter"></div>
@@ -65,7 +65,6 @@ export default {
             <ProductItem @favorite="product" title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
                          :sizes="['XS', 'XL', 'SM', 'MD']"
                          :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
-
           </div>
           <vue-awesome-paginate
               :total-items="50"
