@@ -2,19 +2,37 @@
 import ProductItem from "@/components/ProductItem.vue";
 import CategoryListRoute from "@/components/CategoryListRoute.vue";
 import {VueAwesomePaginate} from "vue-awesome-paginate";
+import {useCategoryStore} from "@/stores/categoies.js";
+import {useProductsStore} from "@/stores/products.js";
 
 export default {
   name: "CategoryPage",
   components: {VueAwesomePaginate, CategoryListRoute, ProductItem},
+  setup () {
+    const productsStore = useProductsStore()
+
+    return {productsStore};
+  },
   data () {
     return {
       currentPage: 1
+      // filter: {
+      //   page: 1,
+      //   // 'category[eq]':
+      // }
     }
   },
   methods: {
-    product () {
-      console.log("Product")
+    async paginate () {
+      await this.productsStore.getProducts({
+        page: this.currentPage
+      })
     }
+  },
+  mounted () {
+    this.productsStore.getProducts({
+      page: 1
+    })
   }
 }
 </script>
@@ -54,6 +72,7 @@ export default {
               :items-per-page="5"
               :max-pages-shown="5"
               v-model="currentPage"
+              :on-click="paginate"
           />
         </div>
       </div>
