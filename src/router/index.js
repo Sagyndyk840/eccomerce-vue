@@ -56,7 +56,7 @@ const routes = [
                 meta: {roles: ['guest', 'auth']},
             },
             {
-                path: '/product',
+                path: '/product/:id',
                 component: () => import('@/pages/product/ProductPage.vue'),
                 name: 'ProductPage',
                 meta: {roles: ['guest', 'auth']},

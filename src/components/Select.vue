@@ -12,6 +12,12 @@ export default {
       type: Array,
       required: true
     },
+    optionId: {
+      type: String
+    },
+    optionValue: {
+      type: String
+    },
     value: {
       default: "",
       type: [String, Number],
@@ -37,11 +43,11 @@ export default {
     <select @change="handleSelectChange"  class="select" :class="className">
       <option
           v-for="option in options"
-          :key="option.value"
+          :key="option.id"
           :value="option.value"
           :selected="option.selected"
           :disabled="option.disabled"
-      >{{ option.label }}</option>
+      >{{ option.title }}</option>
     </select>
     <div class="m-t-10">
       <ErrorMessage :errors="errors" />

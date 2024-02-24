@@ -2,40 +2,20 @@
 import Button from "@/components/Button.vue";
 import Select from "@/components/Select.vue";
 import {useVuelidate} from "@vuelidate/core";
-import {email, helpers, minLength, required, sameAs} from "@vuelidate/validators";
+import {helpers, minLength, required, } from "@vuelidate/validators";
 import ErrorMessage from "@/components/ErrorMessage.vue";
+import {useSingleProductStore} from "@/stores/single-product.js";
 
 export default {
   name: "ProductPage",
   components: {ErrorMessage, Select, Button},
   setup () {
-    return { v$: useVuelidate() }
+    const singleProductStore = useSingleProductStore()
+
+    return { v$: useVuelidate(), singleProductStore }
   },
   data () {
     return {
-      selectOptions: [
-        { value: 'size', label: 'Выберите размер', disabled: true, selected: true },
-        { value: 'XS', label: 'XS' },
-        { value: 'S', label: 'S' },
-        { value: 'M', label: 'M' },
-      ],
-      colors: [
-        {
-          id: 1,
-          color: '#F1DDAA',
-          title: 'Цвет: Кофе с молоком меланж'
-        },
-        {
-          id: 2,
-          color: '#6F83A4',
-          title: 'Цвет: Синый'
-        },
-        {
-          id: 3,
-          color: 'white',
-          title: 'Цвет: Белый'
-        }
-      ],
       form: {
         selectSize: '',
         changeColor: '',
@@ -48,6 +28,9 @@ export default {
       if (this.v$.$error) return
       console.log(this.form)
     }
+  },
+  mounted() {
+    this.singleProductStore.getSingleProduct(this.$route.params.id)
   },
   validations () {
     return {
@@ -76,26 +59,26 @@ export default {
         </div>
         <div class="single-product__right">
           <h2 class="single-product__title title">
-            Кремовое пальто
+            {{ singleProductStore.product.title }}
           </h2>
-          <div class="single-product__price price">3150 грн</div>
+          <div class="single-product__price price">{{ singleProductStore.product.price }} грн</div>
           <form @submit.prevent="add" class="w-100">
             <div class="colors-radio single-product__colors">
-              <input v-model="form.changeColor" v-for="color in colors" :key="color.id"
+              <input v-model="form.changeColor" v-for="color in singleProductStore.product.color" :key="color.id"
                      type="radio"
                      :value="color"
                      name="color"
                      class="color-radio single-product__color"
-                     :style="{backgroundColor: color.color}">
+                     :style="{backgroundColor: color.value}">
             </div>
-            <div v-for="color in colors" :key="color.id" class="">
+            <div v-for="color in singleProductStore.product.color" :key="color.id" class="">
               <div v-if="color.id === form.changeColor.id" class="color-title">{{ color.title }}</div>
             </div>
             <div class="m-t-10">
               <ErrorMessage :errors="v$.form.changeColor.$errors" />
             </div>
 
-            <Select v-model:value="form.selectSize" :errors="v$.form.selectSize.$errors" :options="selectOptions"  class-name="single-product__select m-t-10" width="100%"/>
+            <Select v-model:value="form.selectSize" :errors="v$.form.selectSize.$errors" :options="this.singleProductStore.product.size"  class-name="single-product__select m-t-10" width="100%"/>
             <div class="single-product__group--btns">
               <Button type="submit" class-name="bg-yellow color-white" title="В КОРЗИНУ"/>
               <Button class-name="bg-white color-black" title="В ИЗБРАННОЕ"/>
@@ -105,16 +88,16 @@ export default {
             <div class="single-product__information--item">
               <div class="single-product__information--title">Подробности</div>
               <div class="single-product__information--content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur distinctio optio sint perferendis voluptatum eveniet aspernatur ea veritatis tempore ipsa at, vero autem! Quas repudiandae quos enim. Vitae, provident eveniet.
+                {{ singleProductStore.product.description }}
               </div>
             </div>
-            <div class="single-product__information--item">
-              <div class="single-product__information--title">Обмеры и описание</div>
-              <div class="single-product__information--content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur distinctio optio sint perferendis voluptatum eveniet aspernatur ea veritatis tempore ipsa at, vero autem! Quas repudiandae quos enim. Vitae, provident eveniet.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione vel tempore praesentium magni, quis minima dignissimos vitae. Culpa, vitae, ut voluptatem neque assumenda officia rem et alias adipisci sapiente, incidunt tempora magni nihil delectus dolor laborum ipsum saepe praesentium repudiandae sequi aliquid omnis. Fugiat modi qui ut cum! Voluptatem numquam repellendus repellat assumenda vel quasi repudiandae, dolores dolor sequi culpa totam aspernatur necessitatibus dicta magnam, iste maiores et? Deserunt, expedita eos, repudiandae odit consequuntur autem assumenda molestiae atque obcaecati quaerat provident rerum in architecto! Voluptates fuga sit vitae ab debitis unde, exercitationem eaque, numquam odit odio voluptatum consequuntur natus. Pariatur facere sit repellendus. Inventore, dignissimos. Sint magnam assumenda, explicabo necessitatibus ab laudantium cum ut temporibus vitae officiis vero amet commodi eligendi pariatur aliquid ex provident voluptatem quisquam facilis ullam sequi dolorem suscipit odio? Repellendus, sit ea maiores dicta temporibus possimus iusto minima omnis, nostrum aliquid libero repudiandae explicabo delectus laborum! Consectetur iusto quisquam consequuntur voluptatibus quod, magnam illo nostrum doloribus sunt natus minima blanditiis laudantium inventore doloremque optio nulla facilis quaerat illum, sed libero provident mollitia laboriosam esse eligendi? Cum, rem nihil reiciendis, qui ad ipsam repellendus expedita ipsa porro libero ullam sit exercitationem ea non cupiditate! Illo ipsum eius repellat nisi! Voluptate deserunt distinctio, quisquam illum impedit assumenda aliquam porro rem accusantium odio necessitatibus vel nesciunt tenetur non nostrum nobis rerum nemo dolor atque voluptas at eum eligendi itaque! Quam consequuntur ipsum soluta voluptas inventore voluptate. Atque laborum cupiditate quam blanditiis numquam delectus, reprehenderit debitis at. Libero provident perferendis iusto eos similique natus assumenda eligendi repellat optio, velit deserunt blanditiis saepe quod. Repellat dolore rerum sit magnam impedit? Dignissimos unde ab dolorem alias fuga, saepe, quo eligendi nam voluptatem doloremque sit cum blanditiis harum temporibus sapiente. Omnis consequatur rerum quas dolore, illum, ut iure quidem, tempore odit maiores ad possimus excepturi? Suscipit blanditiis in quae esse numquam voluptatem ea est voluptas itaque dicta vitae natus enim, modi porro quaerat illo cupiditate quo eaque velit nostrum, explicabo rem aliquid! Doloribus dolorem accusantium expedita eligendi exercitationem aut vitae facilis sequi, hic maxime voluptate incidunt ullam facere odio optio dicta distinctio unde officiis fugit a. Sit maiores consequatur hic laudantium distinctio impedit voluptas, excepturi eum, ut cupiditate quia assumenda dolores, voluptatem et! Minus, nam eveniet! Libero laborum provident vero consequuntur expedita, nisi error natus ipsum eius nemo maxime deleniti magni quae. Fuga eos vero molestiae? Enim fugit dolor, quo qui culpa consequatur.
-              </div>
-            </div>
+<!--            <div class="single-product__information&#45;&#45;item">-->
+<!--              <div class="single-product__information&#45;&#45;title">Обмеры и описание</div>-->
+<!--              <div class="single-product__information&#45;&#45;content">-->
+<!--                Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur distinctio optio sint perferendis voluptatum eveniet aspernatur ea veritatis tempore ipsa at, vero autem! Quas repudiandae quos enim. Vitae, provident eveniet.-->
+<!--                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione vel tempore praesentium magni, quis minima dignissimos vitae. Culpa, vitae, ut voluptatem neque assumenda officia rem et alias adipisci sapiente, incidunt tempora magni nihil delectus dolor laborum ipsum saepe praesentium repudiandae sequi aliquid omnis. Fugiat modi qui ut cum! Voluptatem numquam repellendus repellat assumenda vel quasi repudiandae, dolores dolor sequi culpa totam aspernatur necessitatibus dicta magnam, iste maiores et? Deserunt, expedita eos, repudiandae odit consequuntur autem assumenda molestiae atque obcaecati quaerat provident rerum in architecto! Voluptates fuga sit vitae ab debitis unde, exercitationem eaque, numquam odit odio voluptatum consequuntur natus. Pariatur facere sit repellendus. Inventore, dignissimos. Sint magnam assumenda, explicabo necessitatibus ab laudantium cum ut temporibus vitae officiis vero amet commodi eligendi pariatur aliquid ex provident voluptatem quisquam facilis ullam sequi dolorem suscipit odio? Repellendus, sit ea maiores dicta temporibus possimus iusto minima omnis, nostrum aliquid libero repudiandae explicabo delectus laborum! Consectetur iusto quisquam consequuntur voluptatibus quod, magnam illo nostrum doloribus sunt natus minima blanditiis laudantium inventore doloremque optio nulla facilis quaerat illum, sed libero provident mollitia laboriosam esse eligendi? Cum, rem nihil reiciendis, qui ad ipsam repellendus expedita ipsa porro libero ullam sit exercitationem ea non cupiditate! Illo ipsum eius repellat nisi! Voluptate deserunt distinctio, quisquam illum impedit assumenda aliquam porro rem accusantium odio necessitatibus vel nesciunt tenetur non nostrum nobis rerum nemo dolor atque voluptas at eum eligendi itaque! Quam consequuntur ipsum soluta voluptas inventore voluptate. Atque laborum cupiditate quam blanditiis numquam delectus, reprehenderit debitis at. Libero provident perferendis iusto eos similique natus assumenda eligendi repellat optio, velit deserunt blanditiis saepe quod. Repellat dolore rerum sit magnam impedit? Dignissimos unde ab dolorem alias fuga, saepe, quo eligendi nam voluptatem doloremque sit cum blanditiis harum temporibus sapiente. Omnis consequatur rerum quas dolore, illum, ut iure quidem, tempore odit maiores ad possimus excepturi? Suscipit blanditiis in quae esse numquam voluptatem ea est voluptas itaque dicta vitae natus enim, modi porro quaerat illo cupiditate quo eaque velit nostrum, explicabo rem aliquid! Doloribus dolorem accusantium expedita eligendi exercitationem aut vitae facilis sequi, hic maxime voluptate incidunt ullam facere odio optio dicta distinctio unde officiis fugit a. Sit maiores consequatur hic laudantium distinctio impedit voluptas, excepturi eum, ut cupiditate quia assumenda dolores, voluptatem et! Minus, nam eveniet! Libero laborum provident vero consequuntur expedita, nisi error natus ipsum eius nemo maxime deleniti magni quae. Fuga eos vero molestiae? Enim fugit dolor, quo qui culpa consequatur.-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
         </div>
       </div>
