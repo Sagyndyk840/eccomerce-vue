@@ -1,14 +1,17 @@
 <script>
 import ProductItem from "@/components/ProductItem.vue";
 import {VueAwesomePaginate} from "vue-awesome-paginate";
+import {useProductsStore} from "@/stores/products.js";
+import {useFavoriteStore} from "@/stores/favorite.js";
 
 export default {
   name: "FavoritePage",
   components: {VueAwesomePaginate, ProductItem},
-  data () {
-    return {
-      currentPage: 1
-    }
+  setup () {
+    const productsStore = useProductsStore()
+    const favoriteStore = useFavoriteStore()
+
+    return {productsStore, favoriteStore};
   },
 }
 </script>
@@ -18,29 +21,18 @@ export default {
     <div class="container">
       <h2 class="title favorite-title">Избранное</h2>
       <div class="favorite-inner">
-        <ProductItem  title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
-                     :sizes="['XS', 'XL', 'SM', 'MD']"
-                     :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
-        <ProductItem  title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
-                     :sizes="['XS', 'XL', 'SM', 'MD']"
-                     :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
-        <ProductItem  title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
-                      :sizes="['XS', 'XL', 'SM', 'MD']"
-                      :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
-        <ProductItem  title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
-                      :sizes="['XS', 'XL', 'SM', 'MD']"
-                      :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
-        <ProductItem  title="Белая куртка" img="src/assets/images/png/product-1.png" :new-product="false" price="2900"
-                      :sizes="['XS', 'XL', 'SM', 'MD']"
-                      :colors="['#871212', '#F1DDAA']" :router="{name: 'HomePage'}"/>
+        <ProductItem
+            v-for="product in favoriteStore.getFavorites" :key="product.id"
+            @favorite="favoriteStore.toggleFavorite(product)"
+            :title="product.title"
+            img="src/assets/images/png/product-1.png"
+            :new-product="false"
+            :price="product.price"
+            :favorite-active="favoriteStore.isFavorite(product)"
+            :sizes="product.size"
+            :colors="product.color"
+            :router="{name: 'ProductPage', params: {id: product.id}}" />
       </div>
-      <vue-awesome-paginate
-          :total-items="50"
-          :items-per-page="5"
-          :max-pages-shown="5"
-          v-model="currentPage"
-
-      />
     </div>
   </div>
 </template>

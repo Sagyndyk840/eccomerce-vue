@@ -7,7 +7,6 @@ export const useFavoriteStore = defineStore({
     }),
     getters: {
         getFavorites (state) {
-            console.log(state.favorites)
             return state.favorites
         },
 
@@ -29,8 +28,5 @@ export const useFavoriteStore = defineStore({
             // Сохранить избранные товары в localStorage
             localStorage.setItem('favorites', JSON.stringify(this.favorites));
         },
-
-
-
     }
 })
