@@ -5,14 +5,18 @@ import {useVuelidate} from "@vuelidate/core";
 import {helpers, minLength, required, } from "@vuelidate/validators";
 import ErrorMessage from "@/components/ErrorMessage.vue";
 import {useSingleProductStore} from "@/stores/single-product.js";
+import {useCartStore} from "@/stores/cart.js";
+import {useFavoriteStore} from "@/stores/favorite.js";
 
 export default {
   name: "ProductPage",
   components: {ErrorMessage, Select, Button},
   setup () {
     const singleProductStore = useSingleProductStore()
+    const cartStore = useCartStore()
+    const favoriteStore = useFavoriteStore()
 
-    return { v$: useVuelidate(), singleProductStore }
+    return { v$: useVuelidate(), singleProductStore, cartStore, favoriteStore }
   },
   data () {
     return {
@@ -23,14 +27,22 @@ export default {
     }
   },
   methods: {
-    add () {
+    addCart () {
       this.v$.$validate()
       if (this.v$.$error) return
-      console.log(this.form)
+      this.cartStore.addCart({
+        product_id: this.$route.params.id,
+        color_id: this.form.changeColor.id,
+        size_id: this.form.selectSize,
+        count: 1,
+      })
     }
   },
   mounted() {
     this.singleProductStore.getSingleProduct(this.$route.params.id)
+  },
+  watch: {
+
   },
   validations () {
     return {
@@ -62,7 +74,7 @@ export default {
             {{ singleProductStore.product.title }}
           </h2>
           <div class="single-product__price price">{{ singleProductStore.product.price }} грн</div>
-          <form @submit.prevent="add" class="w-100">
+          <form @submit.prevent="addCart" class="w-100">
             <div class="colors-radio single-product__colors">
               <input v-model="form.changeColor" v-for="color in singleProductStore.product.color" :key="color.id"
                      type="radio"
@@ -78,10 +90,10 @@ export default {
               <ErrorMessage :errors="v$.form.changeColor.$errors" />
             </div>
 
-            <Select v-model:value="form.selectSize" :errors="v$.form.selectSize.$errors" :options="this.singleProductStore.product.size"  class-name="single-product__select m-t-10" width="100%"/>
+            <Select v-model:value="form.selectSize" option-id="id" option-value="title" :errors="v$.form.selectSize.$errors" :options="this.singleProductStore.product.size"  class-name="single-product__select m-t-10" width="100%"/>
             <div class="single-product__group--btns">
               <Button type="submit" class-name="bg-yellow color-white" title="В КОРЗИНУ"/>
-              <Button class-name="bg-white color-black" title="В ИЗБРАННОЕ"/>
+              <Button @click="favoriteStore.toggleFavorite(singleProductStore.product)" class-name="bg-white color-black" :title="favoriteStore.isFavorite(singleProductStore.product) ? 'ТОВАР В ИЗБРАННОЕ' : 'В ИЗБРАННОЕ'"/>
             </div>
           </form>
           <div class="single-product__information">

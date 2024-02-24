@@ -3,14 +3,16 @@ import ProductItem from "@/components/ProductItem.vue";
 import CategoryListRoute from "@/components/CategoryListRoute.vue";
 import {VueAwesomePaginate} from "vue-awesome-paginate";
 import {useProductsStore} from "@/stores/products.js";
+import {useFavoriteStore} from "@/stores/favorite.js";
 
 export default {
   name: "CategoryPage",
   components: {VueAwesomePaginate, CategoryListRoute, ProductItem},
   setup () {
     const productsStore = useProductsStore()
+    const favoriteStore = useFavoriteStore()
 
-    return {productsStore};
+    return {productsStore, favoriteStore};
   },
   data () {
     return {
@@ -44,18 +46,15 @@ export default {
           <div class="catalog-products">
             <ProductItem
                 v-for="product in productsStore.products" :key="product.id"
-                @favorite="favoriteProduct"
+                @favorite="favoriteStore.toggleFavorite(product)"
                 :title="product.title"
                 img="src/assets/images/png/product-1.png"
                 :new-product="false"
                 :price="product.price"
+                :favorite-active="favoriteStore.isFavorite(product)"
                          :sizes="product.size"
-                         :colors="product.color" :router="{name: 'ProductPage', params: {id: product.id}}"/>
-          </div>
-          <div>
-            <pre>
-              {{}}
-            </pre>
+                         :colors="product.color"
+                :router="{name: 'ProductPage', params: {id: product.id}}" />
           </div>
           <vue-awesome-paginate
               :total-items="productsStore.pagination.total"

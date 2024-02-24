@@ -20,7 +20,7 @@ export default {
     },
     value: {
       default: "",
-      type: [String, Number],
+      type: [Object],
     },
     errors: {
       type: Array,
@@ -43,11 +43,11 @@ export default {
     <select @change="handleSelectChange"  class="select" :class="className">
       <option
           v-for="option in options"
-          :key="option.id"
-          :value="option.value"
+          :key="option[optionId]"
+          :value="option[optionId]"
           :selected="option.selected"
           :disabled="option.disabled"
-      >{{ option.title }}</option>
+      >{{ option[optionValue] }}</option>
     </select>
     <div class="m-t-10">
       <ErrorMessage :errors="errors" />
