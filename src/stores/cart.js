@@ -6,6 +6,7 @@ export const useCartStore = defineStore({
     id: 'cart',
     state: () => ({
         loading: false,
+        cart: {}
     }),
     getters: {
     },
@@ -26,14 +27,19 @@ export const useCartStore = defineStore({
             }
         },
 
-        async removeCart (data) {
+        async deleteCart (data) {
             try {
                 this.loading = true
 
-                let response = await api.delete('cart', data)
+                let params = new URLSearchParams(data);
+
+                let url = `cart?${params.toString()}`;
+
+                let response = await api.delete(url)
 
                 if (response.status === 200) {
                     notifyDefault('Товар удален из корзины', 'success')
+                    await this.getCartItems()
                 }
             } catch (e) {
 
@@ -44,11 +50,14 @@ export const useCartStore = defineStore({
 
         async getCartItems () {
             try {
+                this.loading = true
 
+                let response = await api.get('cart')
+                this.cart = response.data.data
             } catch (e) {
 
             } finally {
-
+                this.loading = false
             }
         }
     }

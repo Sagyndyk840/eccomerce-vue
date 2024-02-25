@@ -1,9 +1,29 @@
 <script>
 import CartItem from "@/components/cart/CartItem.vue";
+import {useCartStore} from "@/stores/cart.js";
 
 export default {
   name: "CartList",
-  components: {CartItem}
+  setup () {
+    const cartStore = useCartStore();
+    return {cartStore}
+  },
+  components: {CartItem},
+  props: {
+    carts: {
+      type: [Array],
+      required: true
+    }
+  },
+  methods: {
+    async deleteCart(data) {
+      await this.cartStore.deleteCart({
+        product_id: data.id,
+        color_id: data.pivot.color_id,
+        size_id: data.pivot.size_id
+      })
+    }
+  }
 }
 </script>
 
@@ -12,19 +32,15 @@ export default {
     <div class="container">
       <div class="cart-list__inner">
         <CartItem
+            v-for="cart in carts"
+            @delete="deleteCart(cart)"
+            :key="cart.id"
             article="1589956"
             color="#E0BEA2"
             img="src/assets/images/png/single-product.png"
-            price="9450"
+            :price="cart.price"
             size="XL"
-            title="Кремовое пальто" />
-        <CartItem
-            article="1589956"
-            color="#E0BEA2"
-            img="src/assets/images/png/single-product.png"
-            price="9450"
-            size="XL"
-            title="Кремовое пальто" />
+            :title="cart.title" />
       </div>
     </div>
   </section>

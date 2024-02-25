@@ -1,10 +1,18 @@
 <script>
 import CartList from "@/components/cart/CartList.vue";
 import OrderList from "@/components/order/OrderList.vue";
+import {useCartStore} from "@/stores/cart.js";
 
 export default {
   name: "CartPage",
   components: {OrderList, CartList},
+  setup () {
+    const cartStore = useCartStore();
+    return {cartStore}
+  },
+  mounted() {
+    this.cartStore.getCartItems()
+  }
 }
 </script>
 
@@ -13,10 +21,10 @@ export default {
     <div class="container">
       <h2 class="cart-title title">Ваш заказ</h2>
     </div>
-    <CartList />
+    <CartList :carts="cartStore.cart.products" />
     <div class="container">
       <div class="cart-total">
-        К оплате: <span>15250 грн</span>
+        К оплате: <span>{{ cartStore.cart.amount }} грн</span>
       </div>
     </div>
   </div>
