@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import {api} from "@/boot/axios.js";
 import {notifyDefault} from "@/methods/notify.js";
+import {dynamicQueryParams} from "@/helpers/dynamic_query_params.js";
 
 export const useCartStore = defineStore({
     id: 'cart',
@@ -31,11 +32,7 @@ export const useCartStore = defineStore({
             try {
                 this.loading = true
 
-                let params = new URLSearchParams(data);
-
-                let url = `cart?${params.toString()}`;
-
-                let response = await api.delete(url)
+                let response = await api.delete(dynamicQueryParams(data, 'cart'))
 
                 if (response.status === 200) {
                     notifyDefault('Товар удален из корзины', 'success')
