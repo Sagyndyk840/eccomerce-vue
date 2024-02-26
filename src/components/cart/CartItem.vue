@@ -1,44 +1,72 @@
 <script>
+import {useCartStore} from "@/stores/cart.js";
+
 export default {
   name: "CartItem",
   props: {
-    img: {
-      type: String,
-      required: true
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    article: {
-      type: String,
-      required: true
-    },
-    color: {
-      type: String,
-      required: true
-    },
-    size: {
-      type: String,
-      required: true
-    },
-    price: {
-      type: String,
+    // img: {
+    //   type: String,
+    //   required: true
+    // },
+    // title: {
+    //   type: String,
+    //   required: true
+    // },
+    // article: {
+    //   type: String,
+    //   required: true
+    // },
+    // color: {
+    //   type: String,
+    //   required: true
+    // },
+    // size: {
+    //   type: String,
+    //   required: true
+    // },
+    // price: {
+    //   type: String,
+    //   required: true
+    // },
+    // count : {
+    //   type: [Number, String],
+    //   required: true
+    // }
+    cart: {
+      type: Object,
       required: true
     }
+  },
+  setup () {
+    const cartStore = useCartStore();
+    return {cartStore}
   },
   data () {
     return {
-      count: 1,
+      counter: this.cart.pivot.count
     }
   },
   methods: {
-    increment () {
-      this.count++
+    async increment () {
+      if (this.counter >= 99) return
+      this.counter++
+      await this.addCart()
     },
-    decrement () {
-      this.count--
+    async decrement () {
+      if (this.counter <= 0) return
+      this.counter--
+      await this.addCart()
+
+    },
+    async addCart () {
+      await this.cartStore.addCart({
+        product_id: this.cart.id,
+        color_id: this.cart.pivot.color_id,
+        size_id: this.cart.pivot.size_id,
+        count: this.counter,
+      })
     }
+
   }
 }
 </script>
@@ -47,19 +75,19 @@ export default {
   <div class="cart-item">
     <div class="cart-item__first">
       <div class="cart-item__image">
-        <img :src="img" :alt="title">
+        <img :src="cart.img" :alt="cart.title">
       </div>
       <div class="cart-item__title">
-        <div class="cart-item__title--top">арт. {{ article }}</div>
-        <div class="cart-item__title--bottom">{{ title }}</div>
+        <div class="cart-item__title--top">арт. {{ cart.article }}</div>
+        <div class="cart-item__title--bottom">{{ cart.id }}</div>
       </div>
     </div>
     <div class="cart-item__colors">
-      <div class="cart-item__color" :style="{'background-color': color}">
+      <div class="cart-item__color" :style="{'background-color': cart.color}">
       </div>
     </div>
     <div class="cart-item__size">
-      {{ size }}
+      XL
     </div>
     <div class="cart-item__counter">
       <button @click="decrement">
@@ -74,7 +102,7 @@ export default {
           </defs>
         </svg>
       </button>
-      <input v-model="count" type="number" min="1" max="100" value="1">
+      <input v-model="counter" type="number" min="1" max="100" >
       <button @click="increment">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
           <g clip-path="url(#clip0_1_1165)">
@@ -89,7 +117,7 @@ export default {
       </button>
     </div>
     <div class="cart-item__price">
-      {{ price }} грн
+      {{ cart.price }} грн
     </div>
     <div class="cart-item__delete">
       <button @click="$emit('delete')">

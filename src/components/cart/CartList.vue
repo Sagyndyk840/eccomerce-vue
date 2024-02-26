@@ -22,7 +22,7 @@ export default {
         color_id: data.pivot.color_id,
         size_id: data.pivot.size_id
       })
-    }
+    },
   }
 }
 </script>
@@ -35,12 +35,8 @@ export default {
             v-for="cart in carts"
             @delete="deleteCart(cart)"
             :key="cart.id"
-            article="1589956"
-            color="#E0BEA2"
-            img="src/assets/images/png/single-product.png"
-            :price="cart.price"
-            size="XL"
-            :title="cart.title" />
+            :cart="cart"
+        />
       </div>
     </div>
   </section>

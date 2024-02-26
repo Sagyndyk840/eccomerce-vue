@@ -20,6 +20,7 @@ export const useCartStore = defineStore({
 
                 if (response.status === 200) {
                     notifyDefault('Товар добавлен корзину', 'success')
+                    await this.getCartItems()
                 }
             } catch (e) {
 

@@ -24,7 +24,6 @@ export default {
         page: this.productsStore.currentPaginate
       })
     },
-    favoriteProduct () {}
   },
   mounted () {
     this.productsStore.getProducts({
