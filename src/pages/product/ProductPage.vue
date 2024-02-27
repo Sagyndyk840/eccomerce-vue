@@ -8,10 +8,11 @@ import {useSingleProductStore} from "@/stores/single-product.js";
 import {useCartStore} from "@/stores/cart.js";
 import {useFavoriteStore} from "@/stores/favorite.js";
 import {isAddCartAuth} from "@/helpers/is_auth.js";
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 export default {
   name: "ProductPage",
-  components: {ErrorMessage, Select, Button},
+  components: {ErrorMessage, Select, Button, ClipLoader},
   setup () {
     const singleProductStore = useSingleProductStore()
     const cartStore = useCartStore()
@@ -94,7 +95,11 @@ export default {
 
             <Select v-model:value="form.selectSize" option-id="id" option-value="title" :errors="v$.form.selectSize.$errors" :options="this.singleProductStore.product.size"  class-name="single-product__select m-t-10" width="100%"/>
             <div class="single-product__group--btns">
-              <Button type="submit" class-name="bg-yellow color-white" title="В КОРЗИНУ"/>
+              <Button :loader="cartStore.loading" type="submit" class-name="bg-yellow color-white" title="В КОРЗИНУ">
+                <template v-slot:loader>
+                  <clip-loader :loading="cartStore.loading" :color="'white'"/>
+                </template>
+              </Button>
               <Button @click="favoriteStore.toggleFavorite(singleProductStore.product)" class-name="bg-white color-black" :title="favoriteStore.isFavorite(singleProductStore.product) ? 'ТОВАР В ИЗБРАННОЕ' : 'В ИЗБРАННОЕ'"/>
             </div>
           </form>

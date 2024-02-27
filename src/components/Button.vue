@@ -1,4 +1,5 @@
 <script>
+
 export default {
   name: "Button",
   props: {
@@ -17,13 +18,20 @@ export default {
     disabled: {
       default: false,
       type: Boolean,
+    },
+    loader: {
+      type: Boolean,
+      default: false,
     }
   }
 }
 </script>
 
 <template>
-    <button class="btn" :class="className" :type="type" :disabled="disabled">{{title}}</button>
+    <button class="btn" :class="className" :type="type" :disabled="disabled">
+      <slot v-if="loader" name="loader"></slot>
+      <span v-else >{{title}}</span>
+    </button>
 </template>
 
 <style scoped lang="scss">
