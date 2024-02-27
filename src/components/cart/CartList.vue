@@ -1,6 +1,7 @@
 <script>
 import CartItem from "@/components/cart/CartItem.vue";
 import {useCartStore} from "@/stores/cart.js";
+import Skeleton from "@/components/Skeleton.vue";
 
 export default {
   name: "CartList",
@@ -8,7 +9,7 @@ export default {
     const cartStore = useCartStore();
     return {cartStore}
   },
-  components: {CartItem},
+  components: {Skeleton, CartItem},
   props: {
     carts: {
       type: [Array],
@@ -31,7 +32,11 @@ export default {
   <section class="cart-list">
     <div class="container">
       <div class="cart-list__inner">
+        <template v-if="cartStore.loading">
+          <skeleton v-for="index in 3" :key="index" width="100%" height="100px" class="m-b-10"></skeleton>
+        </template>
         <CartItem
+            v-else
             v-for="cart in carts"
             @delete="deleteCart(cart)"
             :key="cart.id"

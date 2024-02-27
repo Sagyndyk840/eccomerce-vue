@@ -2,10 +2,11 @@
 import CartList from "@/components/cart/CartList.vue";
 import OrderList from "@/components/order/OrderList.vue";
 import {useCartStore} from "@/stores/cart.js";
+import Skeleton from "@/components/Skeleton.vue";
 
 export default {
   name: "CartPage",
-  components: {OrderList, CartList},
+  components: {Skeleton, OrderList, CartList},
   setup () {
     const cartStore = useCartStore();
     return {cartStore}
@@ -23,7 +24,8 @@ export default {
     </div>
     <CartList :carts="cartStore.cart.products" />
     <div class="container">
-      <div class="cart-total">
+      <skeleton class="cart-total" width="100px" height="10px" v-if="cartStore.loading"/>
+      <div class="cart-total" v-else>
         К оплате: <span>{{ cartStore.cart.amount }} грн</span>
       </div>
     </div>
