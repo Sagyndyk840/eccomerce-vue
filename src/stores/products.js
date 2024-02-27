@@ -26,12 +26,11 @@ export const useProductsStore = defineStore({
                 if (response.status === 200) {
                     this.products = response.data.data
                     this.pagination = response.data.meta
-                    console.log(response.data)
                 }
             } catch (e) {
 
             } finally {
-                this.loading = true
+                this.loading = false
             }
         }
     }

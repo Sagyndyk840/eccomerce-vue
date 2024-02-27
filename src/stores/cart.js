@@ -42,7 +42,7 @@ export const useCartStore = defineStore({
             } catch (e) {
 
             } finally {
-                this.loading = true
+                this.loading = false
             }
         },
 

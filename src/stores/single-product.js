@@ -22,7 +22,7 @@ export const useSingleProductStore = defineStore({
             } catch (e) {
 
             } finally {
-                this.loading = true
+                this.loading = false
             }
         }
     }

@@ -4,10 +4,11 @@ import CategoryListRoute from "@/components/CategoryListRoute.vue";
 import {VueAwesomePaginate} from "vue-awesome-paginate";
 import {useProductsStore} from "@/stores/products.js";
 import {useFavoriteStore} from "@/stores/favorite.js";
+import Skeleton from "@/components/Skeleton.vue";
 
 export default {
   name: "CategoryPage",
-  components: {VueAwesomePaginate, CategoryListRoute, ProductItem},
+  components: {Skeleton, VueAwesomePaginate, CategoryListRoute, ProductItem},
   setup () {
     const productsStore = useProductsStore()
     const favoriteStore = useFavoriteStore()
@@ -42,18 +43,21 @@ export default {
         </div>
         <div class="catalog-right">
           <div class="filter"></div>
-          <div class="catalog-products">
-            <ProductItem
-                v-for="product in productsStore.products" :key="product.id"
-                @favorite="favoriteStore.toggleFavorite(product)"
-                :title="product.title"
-                img="src/assets/images/png/product-1.png"
-                :new-product="false"
-                :price="product.price"
-                :favorite-active="favoriteStore.isFavorite(product)"
-                         :sizes="product.size"
-                         :colors="product.color"
-                :router="{name: 'ProductPage', params: {id: product.id}}" />
+          <div class="catalog-products" v-if="productsStore.loading">
+            <skeleton height="340px" class="catalog-item" v-for="index in 9" :key="index" />
+          </div>
+          <div class="catalog-products" v-else>
+              <ProductItem
+                  v-for="product in productsStore.products" :key="product.id"
+                  @favorite="favoriteStore.toggleFavorite(product)"
+                  :title="product.title"
+                  img="src/assets/images/png/product-1.png"
+                  :new-product="false"
+                  :price="product.price"
+                  :favorite-active="favoriteStore.isFavorite(product)"
+                           :sizes="product.size"
+                           :colors="product.color"
+                  :router="{name: 'ProductPage', params: {id: product.id}}" />
           </div>
           <vue-awesome-paginate
               :total-items="productsStore.pagination.total"
@@ -68,6 +72,18 @@ export default {
 </template>
 
 <style  lang="scss">
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+
 .catalog-page {
   margin-top: 70px;
 
