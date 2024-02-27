@@ -189,7 +189,7 @@ export default {
 
   &-inner {
     display: grid;
-    grid-template-columns: 8fr 3.2fr;
+    grid-template-columns: 1fr 1fr;
     column-gap: 20px;
   }
 
