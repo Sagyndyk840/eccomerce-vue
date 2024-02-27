@@ -97,7 +97,7 @@ export default {
             <div class="single-product__group--btns">
               <Button :loader="cartStore.loading" type="submit" class-name="bg-yellow color-white" title="В КОРЗИНУ">
                 <template v-slot:loader>
-                  <clip-loader :loading="cartStore.loading" :color="'white'"/>
+                  <clip-loader  :color="'white'"/>
                 </template>
               </Button>
               <Button @click="favoriteStore.toggleFavorite(singleProductStore.product)" class-name="bg-white color-black" :title="favoriteStore.isFavorite(singleProductStore.product) ? 'ТОВАР В ИЗБРАННОЕ' : 'В ИЗБРАННОЕ'"/>
