@@ -26,7 +26,7 @@ export default {
   <div class="cart">
     <div class="container">
       <h2 class="cart-title title">
-        {{ cartProductLength }}
+        {{ cartProductLength() }}
         </h2>
     </div>
     <CartList :carts="cartStore.cart.products"  />
