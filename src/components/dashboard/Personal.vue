@@ -1,10 +1,58 @@
 <script>
 import Input from "@/components/Input.vue";
 import Button from "@/components/Button.vue";
+import {useAuthStore} from "@/stores/auth.js";
+import {useVuelidate} from "@vuelidate/core";
+import {email, helpers, minLength, required} from "@vuelidate/validators";
 
 export default {
   name: "Personal",
-  components: {Button, Input}
+  components: {Button, Input},
+  setup () {
+    const authStore = useAuthStore()
+
+    return { v$: useVuelidate(), authStore }
+  },
+  data () {
+    return {
+      form: {
+        fio: '',
+        phone: '',
+        email: '',
+        address: '',
+      }
+    }
+  },
+  methods: {
+    async editProfile () {
+      this.v$.$validate()
+      if (this.v$.$error) return
+      await this.authStore.editProfile(this.form)
+    }
+  },
+  validations () {
+    return {
+      form: {
+        email: {
+          email : helpers.withMessage('Вы ввели неверный email', email),
+          required: helpers.withMessage('Пожалуйста, заполните обязательное поле', required),
+          $autoDirty: true
+        },
+        fio: {
+          required: helpers.withMessage('Пожалуйста, заполните обязательное поле', required),
+          $autoDirty: true
+        },
+        phone: {
+          required: helpers.withMessage('Пожалуйста, заполните обязательное поле', required),
+          $autoDirty: true
+        },
+        address: {
+          required: helpers.withMessage('Пожалуйста, заполните обязательное поле', required),
+          $autoDirty: true
+        },
+      }
+    }
+  }
 }
 </script>
 
@@ -14,18 +62,17 @@ export default {
       <div class="personal-title">
         Персональные данные:
       </div>
-      <form>
+      <form @submit.prevent="editProfile">
         <div class="personal-group__first">
-          <Input class-name="" type="text" placeholder="Ваше имя" />
-          <Input class-name="" type="text" placeholder="Ваша фамилия" />
-          <Input class-name="" type="text" placeholder="Ваш e-mail" />
-          <Input class-name="" type="text" placeholder="Ваш телефон" />
+          <Input v-model:value="form.fio" class-name="" type="text" placeholder="Ваше ФИО" :errors="v$.form.fio.$errors"/>
+          <Input v-model:value="form.email" class-name="" type="text" placeholder="Ваш e-mail" :errors="v$.form.email.$errors"/>
+          <Input v-model:value="form.phone" class-name="" type="text" placeholder="Ваш телефон" :errors="v$.form.phone.$errors"/>
         </div>
         <div class="personal-title">
           Адрес доставки:
         </div>
         <div class="personal-group__second">
-          <Input class-name="" type="text" placeholder="Ваш адрес" />
+          <Input v-model:value="form.address" class-name="" type="text" placeholder="Ваш адрес" :errors="v$.form.address.$errors"/>
         </div>
         <Button class-name="bg-yellow color-white btn-personal" title="ВОЙТИ" type="submit"/>
       </form>
@@ -51,7 +98,7 @@ export default {
   &-group {
     &__first {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 20px;
     }
 

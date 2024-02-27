@@ -57,6 +57,16 @@ export const useAuthStore = defineStore({
             } finally {
 
             }
+        },
+
+        async editProfile (data) {
+            try {
+
+            } catch (e) {
+
+            } finally {
+
+            }
         }
 
     }

@@ -7,7 +7,7 @@ export default {
   components: {Personal, HistoryList},
   data () {
     return {
-      show: 'order'
+      show: 'personal'
     }
   },
   methods: {
