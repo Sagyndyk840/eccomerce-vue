@@ -2,6 +2,7 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import {useCategoryStore} from "@/stores/categoies.js";
+import Skeleton from "@/components/Skeleton.vue";
 
 export default {
   setup () {
@@ -11,6 +12,7 @@ export default {
     return {categoryStore}
   },
   components: {
+    Skeleton,
     Swiper,
     SwiperSlide,
   },
@@ -35,7 +37,11 @@ export default {
     <div class="container">
       <div class="catalog-inner">
         <div class="catalog-title section-title">Категории</div>
+          <div class="catalog-group" v-if="categoryStore.loading">
+              <skeleton height="400px" class="catalog-item" v-for="index in 4" :key="index"/>
+          </div>
           <swiper
+              v-else
               class="catalog-group"
               :slides-per-view="4"
               :space-between="15"

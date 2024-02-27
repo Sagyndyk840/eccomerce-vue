@@ -22,7 +22,7 @@ export const useCategoryStore = defineStore({
             } catch (e) {
 
             } finally {
-                this.loading = true
+                this.loading = false
             }
         }
     }
