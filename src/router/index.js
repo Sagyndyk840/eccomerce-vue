@@ -66,6 +66,12 @@ const routes = [
                 component: () => import('@/pages/CartPage.vue'),
                 name: 'CartPage',
                 meta: {roles: ['auth']},
+            },
+            {
+                path: '/dashboard',
+                component: () => import('@/pages/DashboardPage.vue'),
+                name: 'DashboardPage',
+                meta: {roles: ['auth']},
             }
         ]
     }
