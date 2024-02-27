@@ -23,7 +23,7 @@ export default {
         <div class="history-item__top--btn"></div>
       </div>
     </div>
-    <div class="history-item__bottom ">
+    <div class="history-item__bottom active">
       <HistoryItemProductList />
       <div class="history-item__bottom--contacts">
         <div class="history-item__bottom--contacts__item">
