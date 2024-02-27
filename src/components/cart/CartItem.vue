@@ -4,34 +4,6 @@ import {useCartStore} from "@/stores/cart.js";
 export default {
   name: "CartItem",
   props: {
-    // img: {
-    //   type: String,
-    //   required: true
-    // },
-    // title: {
-    //   type: String,
-    //   required: true
-    // },
-    // article: {
-    //   type: String,
-    //   required: true
-    // },
-    // color: {
-    //   type: String,
-    //   required: true
-    // },
-    // size: {
-    //   type: String,
-    //   required: true
-    // },
-    // price: {
-    //   type: String,
-    //   required: true
-    // },
-    // count : {
-    //   type: [Number, String],
-    //   required: true
-    // }
     cart: {
       type: Object,
       required: true
