@@ -7,6 +7,7 @@ import ErrorMessage from "@/components/ErrorMessage.vue";
 import {useSingleProductStore} from "@/stores/single-product.js";
 import {useCartStore} from "@/stores/cart.js";
 import {useFavoriteStore} from "@/stores/favorite.js";
+import {isAddCartAuth} from "@/helpers/is_auth.js";
 
 export default {
   name: "ProductPage",
@@ -30,6 +31,7 @@ export default {
     addCart () {
       this.v$.$validate()
       if (this.v$.$error) return
+      if (isAddCartAuth(this.$route.meta.roles, 'auth')) return
       this.cartStore.addCart({
         product_id: this.$route.params.id,
         color_id: this.form.changeColor.id,

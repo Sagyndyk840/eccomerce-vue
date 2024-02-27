@@ -13,6 +13,11 @@ export default {
   },
   mounted() {
     this.cartStore.getCartItems()
+  },
+  methods: {
+    cartProductLength () {
+      return this.cartStore.cart.products && this.cartStore.cart.products.length ? 'Ваш заказ' : 'Добавляйте товары'
+    }
   }
 }
 </script>
@@ -20,10 +25,12 @@ export default {
 <template>
   <div class="cart">
     <div class="container">
-      <h2 class="cart-title title">Ваш заказ</h2>
+      <h2 class="cart-title title">
+        {{ cartProductLength }}
+        </h2>
     </div>
-    <CartList :carts="cartStore.cart.products" />
-    <div class="container">
+    <CartList :carts="cartStore.cart.products"  />
+    <div class="container" v-if="cartStore.cart.products && cartStore.cart.products.length">
       <skeleton class="cart-total" width="100px" height="10px" v-if="cartStore.loading"/>
       <div class="cart-total" v-else>
         К оплате: <span>{{ cartStore.cart.amount }} грн</span>
