@@ -41,6 +41,7 @@ export default {
 <template>
   <div class="component-form" :style="{width: width}">
     <select @change="handleSelectChange"  class="select" :class="className">
+      <option selected disabled>Выбрать</option>
       <option
           v-for="option in options"
           :key="option[optionId]"
