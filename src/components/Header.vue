@@ -3,12 +3,8 @@ import {isAuth} from "@/helpers/is_auth.js";
 
 export default {
   name: "Header",
+  methods: {isAuth},
   props: ['global'],
-  mounted() {
-    console.log()
-  },
-  methods: {
-  }
 }
 </script>
 
