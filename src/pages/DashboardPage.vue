@@ -4,7 +4,17 @@ import Personal from "@/components/dashboard/Personal.vue";
 
 export default {
   name: "DashboardPage",
-  components: {Personal, HistoryList}
+  components: {Personal, HistoryList},
+  data () {
+    return {
+      show: 'order'
+    }
+  },
+  methods: {
+    change (value) {
+      this.show = value
+    }
+  }
 }
 </script>
 
@@ -12,15 +22,15 @@ export default {
   <section class="dashboard-navbar">
     <div class="container">
       <div class="dashboard-navbar__inner">
-        <button class="dashboard-navbar__item active">История заказов</button>
-        <button class="dashboard-navbar__item">Личные данные</button>
+        <button @click="change('order')" class="dashboard-navbar__item" :class="{'active': show === 'order'}">История заказов</button>
+        <button @click="change('personal')" class="dashboard-navbar__item" :class="{'active': show === 'personal'}">Личные данные</button>
         <button class="dashboard-navbar__item">Выйти</button>
       </div>
     </div>
   </section>
 
-<!--  <HistoryList />-->
-  <Personal />
+  <HistoryList v-if="show === 'order'"/>
+  <Personal v-else-if="show === 'personal'"/>
 </template>
 
 <style scoped lang="scss">
