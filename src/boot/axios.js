@@ -1,7 +1,9 @@
 import axios from 'axios'
 
 
-const api = axios.create({ baseURL: 'https://market.it-hub.kz/api/' })
+const local = 'http://127.0.0.1:8000'
+const production = 'https://market.it-hub.kz'
+const api = axios.create({ baseURL: `${local}/api/` })
 
 api.interceptors.request.use(function (config) {
     const token = sessionStorage.getItem('token')

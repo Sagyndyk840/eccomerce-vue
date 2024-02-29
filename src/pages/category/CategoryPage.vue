@@ -51,7 +51,7 @@ export default {
                   v-for="product in productsStore.products" :key="product.id"
                   @favorite="favoriteStore.toggleFavorite(product)"
                   :title="product.title"
-                  img="src/assets/images/png/product-1.png"
+                  :img="product.image"
                   :new-product="false"
                   :price="product.price"
                   :favorite-active="favoriteStore.isFavorite(product)"

@@ -70,7 +70,7 @@ export default {
     <div class="container">
       <div class="single-product__inner">
         <div class="single-product__left">
-          <img src="@assets/images/png/single-product.png" alt="">
+          <img :src="singleProductStore.product.image" :alt="singleProductStore.product.title">
         </div>
         <div class="single-product__right">
           <h2 class="single-product__title title">

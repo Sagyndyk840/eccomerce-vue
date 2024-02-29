@@ -41,7 +41,7 @@ export default {
 
 <template>
   <div class="product-item">
-    <img :src="img" :alt="title">
+    <img :src="img" :alt="title" >
     <button @click="$emit('favorite')" class="product-favorite" :class="{
       'active': favoriteActive
     }">
@@ -74,6 +74,8 @@ export default {
 
     img {
       width: 100%;
+      height: 360px;
+      object-fit: cover;
     }
   }
   &-price {

@@ -48,7 +48,7 @@ export default {
           >
             <swiper-slide v-for="category in categoryStore.categories" :key="category.id">
               <router-link  :to="{name: 'CategoryPage'}" class="catalog-item">
-                <img src="@assets/images/png/catalog-item.png" alt="">
+                <img :src="category.image" :alt="category.title">
                 <div class="catalog-item__title">{{ category.title }}</div>
               </router-link>
             </swiper-slide>
@@ -139,6 +139,12 @@ export default {
       font-weight: 300;
       position: absolute;
       bottom: 0;
+    }
+
+    img {
+      height: 450px;
+      width: 100%;
+      object-fit: cover;
     }
   }
 }

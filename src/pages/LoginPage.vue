@@ -4,10 +4,11 @@ import Button from "@/components/Button.vue";
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers, minLength } from '@vuelidate/validators'
 import {useAuthStore} from "@/stores/auth.js";
+import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 
 export default {
   name: "LoginPage",
-  components: {Button, Input},
+  components: {Button, Input, ClipLoader},
   setup () {
 
     const authStore = useAuthStore()
@@ -64,7 +65,11 @@ export default {
             <router-link :to="{name: 'HomePage'}" >Главная</router-link>
             <router-link :to="{name: 'RegisterPage'}" >Нет аккаунта?</router-link>
           </div>
-          <Button :disabled="authStore.loading" class-name="w-443 bg-yellow color-white" title="ВОЙТИ" type="submit"/>
+          <Button :disabled="authStore.loading" :loader="authStore.loading" class-name="w-443 bg-yellow color-white" title="ВОЙТИ" type="submit">
+            <template v-slot:loader>
+              <clip-loader  :color="'white'"/>
+            </template>
+          </Button>
         </form>
       </div>
     </div>

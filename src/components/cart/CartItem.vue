@@ -28,7 +28,6 @@ export default {
       if (this.counter <= 0) return
       this.counter--
       await this.addCart()
-
     },
     async addCart () {
       await this.cartStore.addCart({
@@ -47,7 +46,7 @@ export default {
   <div class="cart-item">
     <div class="cart-item__first">
       <div class="cart-item__image">
-        <img :src="cart.img" :alt="cart.title">
+        <img :src="cart.image" :alt="cart.title">
       </div>
       <div class="cart-item__title">
         <div class="cart-item__title--top">арт. {{ cart.article }}</div>
@@ -55,11 +54,11 @@ export default {
       </div>
     </div>
     <div class="cart-item__colors">
-      <div class="cart-item__color" :style="{'background-color': cart.color}">
+      <div class="cart-item__color" :style="{'background-color': cart.color.find(item => item.id === cart.pivot.color_id).value}">
       </div>
     </div>
     <div class="cart-item__size">
-      XL
+      {{ cart.size.find(item => item.id === cart.pivot.size_id).title }}
     </div>
     <div class="cart-item__counter">
       <button @click="decrement">
