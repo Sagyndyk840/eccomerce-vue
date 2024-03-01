@@ -1,16 +1,23 @@
 <script>
 import HistoryList from "@/components/dashboard/HistoryList.vue";
 import Personal from "@/components/dashboard/Personal.vue";
+import {useAuthStore} from "@/stores/auth.js";
 
 export default {
   name: "DashboardPage",
   components: {Personal, HistoryList},
+  setup () {
+    const authStore = useAuthStore();
+
+    return {authStore}
+  },
   data () {
     return {
       show: 'personal'
     }
   },
   methods: {
+    useAuthStore,
     change (value) {
       this.show = value
     }
@@ -24,7 +31,7 @@ export default {
       <div class="dashboard-navbar__inner">
         <button @click="change('order')" class="dashboard-navbar__item" :class="{'active': show === 'order'}">История заказов</button>
         <button @click="change('personal')" class="dashboard-navbar__item" :class="{'active': show === 'personal'}">Личные данные</button>
-        <button class="dashboard-navbar__item">Выйти</button>
+        <button @click="authStore.logout()" class="dashboard-navbar__item">Выйти</button>
       </div>
     </div>
   </section>

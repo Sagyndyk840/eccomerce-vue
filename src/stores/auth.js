@@ -22,7 +22,10 @@ export const useAuthStore = defineStore({
                 if (response.status === 200) {
                     notifyDefault(response.data.message)
                     sessionStorage.setItem('token', response.data.data.token)
+                    sessionStorage.setItem('user', JSON.stringify(response.data.data.user))
+                    console.log(response.data.data.user)
                     router.push({name: 'HomePage'})
+
                 }
             } catch (e) {
                 console.log(e)
@@ -39,23 +42,21 @@ export const useAuthStore = defineStore({
             }
         },
 
-        async refreshToken () {
-            try {
-
-            } catch (e) {
-
-            } finally {
-
-            }
-        },
-
         async logout () {
             try {
+                this.loading = true
+                let response = await api.post('logout')
 
+                if (response.status === 200) {
+                    notifyDefault(response.data.message)
+                    sessionStorage.removeItem('token')
+                    sessionStorage.removeItem('user')
+                    router.push({name: 'HomePage'})
+                }
             } catch (e) {
 
             } finally {
-
+                this.loading = false
             }
         },
 

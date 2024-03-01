@@ -57,6 +57,22 @@ export const useCartStore = defineStore({
             } finally {
                 this.loading = false
             }
+        },
+
+        async createCart (data) {
+            try {
+                this.loading = true
+                let response = await api.post('cart/create-order', data)
+
+                if (response.status === 200) {
+                    notifyDefault('Заказ оформлен. В ближайшее время с вами свяжется менеджер', 'success')
+                    await this.getCartItems()
+                }
+            } catch (e) {
+                notifyDefault(e.response.data.message, 'error')
+            } finally {
+                this.loading = false
+            }
         }
     }
 })
