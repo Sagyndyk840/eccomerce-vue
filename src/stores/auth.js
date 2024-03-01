@@ -9,9 +9,6 @@ export const useAuthStore = defineStore({
         loading: false,
     }),
     getters: {
-        isAuthenticated (state) {
-            return state.isLoggedIn
-        },
     },
     actions: {
         async auth (url, form) {
