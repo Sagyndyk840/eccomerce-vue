@@ -9,6 +9,7 @@ export const useAuthStore = defineStore({
         loading: false,
     }),
     getters: {
+
     },
     actions: {
         async auth (url, form) {
