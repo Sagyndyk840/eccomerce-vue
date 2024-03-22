@@ -38,7 +38,7 @@ export default {
               <svg width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M2.5 25a9.524 9.524 0 0 1 19.048 0h-2.381A7.143 7.143 0 0 0 4.88 25H2.5Zm9.524-10.714A7.14 7.14 0 0 1 4.88 7.143 7.14 7.14 0 0 1 12.024 0a7.14 7.14 0 0 1 7.143 7.143 7.14 7.14 0 0 1-7.143 7.143Zm0-2.381a4.76 4.76 0 0 0 4.762-4.762 4.76 4.76 0 0 0-4.762-4.762 4.76 4.76 0 0 0-4.762 4.762 4.76 4.76 0 0 0 4.762 4.762Z" fill="#fff"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h25v25H0z"/></clipPath></defs></svg>
             </router-link>
 
-            <router-link :to="{name: 'LoginPage'}" v-else>
+            <router-link data-cy="login" :to="{name: 'LoginPage'}" v-else>
               <svg width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M2.5 25a9.524 9.524 0 0 1 19.048 0h-2.381A7.143 7.143 0 0 0 4.88 25H2.5Zm9.524-10.714A7.14 7.14 0 0 1 4.88 7.143 7.14 7.14 0 0 1 12.024 0a7.14 7.14 0 0 1 7.143 7.143 7.14 7.14 0 0 1-7.143 7.143Zm0-2.381a4.76 4.76 0 0 0 4.762-4.762 4.76 4.76 0 0 0-4.762-4.762 4.76 4.76 0 0 0-4.762 4.762 4.76 4.76 0 0 0 4.762 4.762Z" fill="#fff"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h25v25H0z"/></clipPath></defs></svg>
             </router-link>
           </li>

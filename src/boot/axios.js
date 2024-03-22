@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-const local = 'http://127.0.0.1:8000'
+const local = 'https://market.it-hub.kz'
 const production = 'https://market.it-hub.kz'
 const api = axios.create({ baseURL: `${local}/api/` })
 

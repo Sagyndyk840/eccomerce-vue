@@ -59,13 +59,13 @@ export default {
       <div class="auth-card w-443">
         <h2 class="title auth-title">Авторизация </h2>
         <form @submit.prevent="login">
-          <Input :disabled="authStore.loading" type="text" class-name="w-443" placeholder="Ваш e-mail*" v-model:value="form.email" :errors="v$.form.email.$errors"/>
-          <Input :disabled="authStore.loading" type="password" class-name="w-443" placeholder="Ваш пароль*" v-model:value="form.password" :errors="v$.form.password.$errors"/>
+          <Input data-cy="email" :disabled="authStore.loading" type="text" class-name="w-443" placeholder="Ваш e-mail*" v-model:value="form.email" :errors="v$.form.email.$errors"/>
+          <Input data-cy="password" :disabled="authStore.loading" type="password" class-name="w-443" placeholder="Ваш пароль*" v-model:value="form.password" :errors="v$.form.password.$errors"/>
           <div class="auth-inner">
             <router-link :to="{name: 'HomePage'}" >Главная</router-link>
             <router-link :to="{name: 'RegisterPage'}" >Нет аккаунта?</router-link>
           </div>
-          <Button :disabled="authStore.loading" :loader="authStore.loading" class-name="w-443 bg-yellow color-white" title="ВОЙТИ" type="submit">
+          <Button data-cy="submit" :disabled="authStore.loading" :loader="authStore.loading" class-name="w-443 bg-yellow color-white" title="ВОЙТИ" type="submit">
             <template v-slot:loader>
               <clip-loader  :color="'white'"/>
             </template>
